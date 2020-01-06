@@ -9,7 +9,7 @@ export default  {
   output: {
     file: 'dist/agent.min.js',
     format: 'umd',
-    name: 'opAgent',
+    name: 'Operate',
     globals: {
       bsv: 'bsv',
     }
@@ -27,7 +27,7 @@ export default  {
     }),
     uglify({
       mangle: {
-        reserved: []
+        reserved: ['Operate']
       }
     }),
     banner('Operate / Agent - v<%= pkg.version %>\n<%= pkg.description %>\n<%= pkg.repository %>\nCopyright © <%= new Date().getFullYear() %> <%= pkg.author %>. MIT License')
