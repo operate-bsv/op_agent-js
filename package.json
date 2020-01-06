@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "test": "mocha test/**/*.test.js"
+    "test": "mocha \"test/**/*.test.js\""
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
@@ -16,6 +16,7 @@
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^6.1.0",
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "mocha": "^7.0.0",
     "nock": "^11.7.1",
     "rollup": "^1.28.0",
