@@ -1,6 +1,8 @@
+const { resolve } = require('path')
 const { assert } = require('chai')
 const nock = require('nock')
-const OpApi = require('./../../../lib/operate/adapter/op_api')
+const OpApi = require(resolve('lib/operate/adapter/op_api'))
+
 
 describe('OpApi.fetchOps() with array of references', () => {
   before(() => {
@@ -15,9 +17,6 @@ describe('OpApi.fetchOps() with array of references', () => {
   it('must return a list of functions', async () => {
     const ops = await OpApi.fetchOps(['9ef5fd5c', '0ca59130'])
     assert.isArray(ops)
-    ops.every(o => {
-      assert.equal(o.constructor.name, 'Op')
-    })
     assert.include(ops.map(o => o.ref), '9ef5fd5c')
     assert.include(ops.map(o => o.ref), '0ca59130')
   })

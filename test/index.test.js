@@ -1,5 +1,6 @@
+const { resolve } = require('path')
 const { assert } = require('chai')
-const Operate = require('../lib/index')
+const Operate = require(resolve('lib/index'))
 
 describe('Operate', () => {
   describe('#loadTape()', () => {
