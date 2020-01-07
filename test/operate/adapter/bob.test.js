@@ -22,3 +22,37 @@ describe('Bob.fetchTx()', () => {
     assert.lengthOf(tx.out[0].tape[1].cell, 5)
   })
 })
+
+describe('Bob.fetchTxBy()', () => {
+  before(() => {
+    nock('https://bob.planaria.network/')
+      .get(/.*/)
+      .once()
+      .replyWithFile(200, 'test/mocks/bob_fetch_tx_by.json', {
+        'Content-Type': 'application/json',
+      })
+  })
+
+  it('must fetch tx', async () => {
+    const query = {
+      "find":{
+        "out.tape.cell": {
+          "$elemMatch": {
+            "i": 0,
+            "s": "1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5"
+          }
+        }
+      },
+      "limit": 3
+    }
+    const txns = await Bob.fetchTxBy(query, { apiKey: 'test' })
+    const confirmed = txns.filter(tx => tx.blk)
+
+    assert.lengthOf(confirmed, 3)
+    assert.deepEqual(confirmed.map(tx => tx.txid), [
+      "8f6628e6c942ba140e3f0b6e296df0e66a2da1f2bf6ab0671840924a6a31289f",
+      "301453862873865821ac93ed67cf62f9f0c8ef1e7372ac009afb8419fad7e713",
+      "b2294f24f60f3a4ec90cbce12d6b2ee3582501ab6e5ddf78b060874f3e809bc6"
+    ])
+  })
+})
