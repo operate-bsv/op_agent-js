@@ -2,16 +2,19 @@ const { resolve } = require('path')
 const { assert } = require('chai')
 const Operate = require(resolve('lib/index'))
 
-describe('Operate', () => {
-  describe('#loadTape()', () => {
-    it('should be a function', () => {
-      assert.typeOf(Operate.loadTape, 'function')
-    })
-  })
+describe('Operate#loadTape()', () => {
 
-  describe('#runTape()', () => {
-    it('should be a function', () => {
-      assert.typeOf(Operate.runTape, 'function')
-    })
-  })
+  xit('must load and prepare valid tape')
+
+  xit('must load and run tape')
+
+})
+
+
+describe('Operate#loadTapesBy()', () => {
+
+  xit('must load and prepare valid tapes')
+
+  xit('must run all tapes')
+
 })
