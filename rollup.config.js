@@ -7,14 +7,10 @@ import banner from 'rollup-plugin-banner'
 export default  {
   input: 'lib/index.js',
   output: {
-    file: 'dist/agent.min.js',
+    file: 'dist/operate.min.js',
     format: 'umd',
-    name: 'Operate',
-    globals: {
-      bsv: 'bsv',
-    }
+    name: 'Operate'
   },
-  external: ['bsv'],
   
   plugins: [
     resolve({
@@ -25,11 +21,7 @@ export default  {
       exclude: 'node_modules/**',
       presets: ['@babel/preset-env'],
     }),
-    uglify({
-      mangle: {
-        reserved: ['Operate']
-      }
-    }),
+    uglify(),
     banner('Operate / Agent - v<%= pkg.version %>\n<%= pkg.description %>\n<%= pkg.repository %>\nCopyright © <%= new Date().getFullYear() %> <%= pkg.author %>. MIT License')
   ]
 };
