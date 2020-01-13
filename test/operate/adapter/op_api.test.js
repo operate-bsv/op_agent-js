@@ -15,7 +15,8 @@ describe('OpApi.fetchOps() with array of references', () => {
   })
 
   it('must return a list of functions', async () => {
-    const ops = await OpApi.fetchOps(['9ef5fd5c', '0ca59130'])
+    const adapter = new OpApi()
+    const ops = await adapter.fetchOps(['9ef5fd5c', '0ca59130'])
     assert.isArray(ops)
     assert.include(ops.map(o => o.ref), '9ef5fd5c')
     assert.include(ops.map(o => o.ref), '0ca59130')

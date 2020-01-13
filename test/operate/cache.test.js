@@ -8,24 +8,32 @@ chai.use(chaiAsPromised)
 
 describe('Cache.fetchTx()', () => {
   it('must return a result', async () => {
-    tx = await TestCache.fetchTx("abc", {}, [TestAdapter, {}])
+    const adapter = new TestAdapter()
+    const cache = new TestCache()
+    tx = await cache.fetchTx("abc", adapter)
     assert.equal(tx.txid, 'abc')
   })
 
   it('must throw an error', () => {
-    assert.isRejected(TestCache.fetchTx(null, {}, [TestAdapter, {}]), 'Test error')
+    const adapter = new TestAdapter()
+    const cache = new TestCache()
+    assert.isRejected(cache.fetchTx(null, adapter), 'Test error')
   })
 })
 
 
 describe('Cache.fetchTxBy()', () => {
   it('must return a result', async () => {
-    txs = await TestCache.fetchTxBy({find: 'foo'}, {}, [TestAdapter, {}])
+    const adapter = new TestAdapter()
+    const cache = new TestCache()
+    txs = await cache.fetchTxBy({find: 'foo'}, adapter)
     assert.lengthOf(txs, 1)
     assert.equal(txs[0].txid, 'abcdef')
   })
 
   it('must throw an error', () => {
-    assert.isRejected(TestCache.fetchTxBy(null, {}, [TestAdapter, {}]), 'Test error')
+    const adapter = new TestAdapter()
+    const cache = new TestCache()
+    assert.isRejected(cache.fetchTxBy(null, adapter), 'Test error')
   })
 })

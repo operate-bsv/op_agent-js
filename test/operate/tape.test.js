@@ -101,7 +101,8 @@ describe('Tape#setCellOps()', () => {
       new Cell({ ref: '9ef5fd5c', params: ['foo.bar', 1, 'foo.baz', 2] }),
       new Cell({ ref: '0ca59130', params: ['baz', 'qux', 3] })
     ]})
-    ops = await OpApi.fetchOps(['9ef5fd5c', '0ca59130'])
+    adapter = new OpApi()
+    ops = await adapter.fetchOps(['9ef5fd5c', '0ca59130'])
   })
 
   it('must return tape with function ops', () => {

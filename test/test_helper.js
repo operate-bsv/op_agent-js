@@ -3,7 +3,7 @@ const Adapter = require(resolve('lib/operate/adapter'))
 const Cache = require(resolve('lib/operate/cache'))
 
 class TestAdapter extends Adapter {
-  static fetchTx(txid, opts = {}) {
+  fetchTx(txid) {
     if (txid) {
       return Promise.resolve({ txid })
     } else {
@@ -11,7 +11,7 @@ class TestAdapter extends Adapter {
     }
   }
 
-  static fetchTxBy(query, opts = {}) {
+  fetchTxBy(query) {
     if (query) {
       return Promise.resolve([{ txid: 'abcdef' }])
     } else {
