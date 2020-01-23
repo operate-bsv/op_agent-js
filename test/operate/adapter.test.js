@@ -8,28 +8,24 @@ chai.use(chaiAsPromised)
 
 describe('Adapter.fetchTx()', () => {
   it('must return a result', async () => {
-    adapter = new TestAdapter()
-    tx = await adapter.fetchTx("abc")
+    tx = await TestAdapter.fetchTx("abc")
     assert.equal(tx.txid, 'abc')
   })
 
   it('must throw an error', () => {
-    adapter = new TestAdapter()
-    assert.isRejected(adapter.fetchTx(null), 'Test error')
+    assert.isRejected(TestAdapter.fetchTx(null), 'Test error')
   })
 })
 
 
 describe('Adapter.fetchTxBy()', () => {
   it('must return a result', async () => {
-    adapter = new TestAdapter()
-    txs = await adapter.fetchTxBy({find: 'foo'})
+    txs = await TestAdapter.fetchTxBy({find: 'foo'})
     assert.lengthOf(txs, 1)
     assert.equal(txs[0].txid, 'abcdef')
   })
 
   it('must throw an error', () => {
-    adapter = new TestAdapter()
-    assert.isRejected(adapter.fetchTxBy(null), 'Test error')
+    assert.isRejected(TestAdapter.fetchTxBy(null), 'Test error')
   })
 })

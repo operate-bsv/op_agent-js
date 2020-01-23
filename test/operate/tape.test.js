@@ -17,7 +17,7 @@ before(() => {
 describe('Tape.fromBPU()', () => {
   let tx1, tx2;
   before(() => {
-    // Fake BPU tx with OP_RETURN output 
+    // Fake BPU tx with OP_RETURN output
     tx1 = { out: [
       { i: 0, tape: [
         { i: 0, cell: [
@@ -101,8 +101,7 @@ describe('Tape#setCellOps()', () => {
       new Cell({ ref: '9ef5fd5c', params: ['foo.bar', 1, 'foo.baz', 2] }),
       new Cell({ ref: '0ca59130', params: ['baz', 'qux', 3] })
     ]})
-    adapter = new OpApi()
-    ops = await adapter.fetchOps(['9ef5fd5c', '0ca59130'])
+    ops = await OpApi.fetchOps(['9ef5fd5c', '0ca59130'])
   })
 
   it('must return tape with function ops', () => {
