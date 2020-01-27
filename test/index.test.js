@@ -2,6 +2,7 @@ const { resolve } = require('path')
 const { assert } = require('chai')
 const nock = require('nock')
 const Operate = require(resolve('lib/index'))
+const Agent = require(resolve('lib/operate/agent'))
 const Tape = require(resolve('lib/operate/tape'))
 
 let aliases
@@ -13,7 +14,7 @@ before(() => {
   }
 })
 
-describe('Operate#loadTape()', () => {
+describe('Operate.loadTape()', () => {
   before(() => {
     nock('https://bob.planaria.network/')
       .get(/.*/)
@@ -40,11 +41,10 @@ describe('Operate#loadTape()', () => {
   })
 
   xit('must load and run tape')
-
 })
 
 
-describe('Operate#loadTapesBy()', () => {
+describe('Operate.loadTapesBy()', () => {
   before(() => {
     nock('https://bob.planaria.network/')
       .get(/.*/)
@@ -80,5 +80,17 @@ describe('Operate#loadTapesBy()', () => {
   })
 
   xit('must run all tapes')
+})
 
+
+describe('Operate.Agent', () => {
+  it('must instantiate a new agent', () => {
+    const agent = new Operate.Agent()
+    assert.instanceOf(agent, Agent)
+  })
+
+  it('must set given config on agent', () => {
+    const agent = new Operate.Agent({ aliases: { foo: 'bar' } })
+    assert.deepEqual(agent.config.aliases, { foo: 'bar' })
+  })
 })
