@@ -3,14 +3,16 @@ const { assert } = require('chai')
 const nock = require('nock')
 const Tape = require(resolve('lib/operate/tape'))
 const Cell = require(resolve('lib/operate/cell'))
+const VM = require(resolve('lib/operate/vm'))
 const OpApi = require(resolve('lib/operate/adapter/op_api'))
 
-let cell;
+let op, cell;
 before(() => {
-  const op = `return function(ctx, y)
-                x = ctx or 0
-                return math.pow(x, y)
-              end`;
+  op = `return function(ctx, y)
+          x = ctx or 0
+          y = tonumber(y)
+          return math.atan(x, y)
+        end`;
   cell = new Cell({ ref: 'test', params: ["2"], op })
 })
 
@@ -80,10 +82,25 @@ describe('Tape.fromBPU()', () => {
 
 
 describe('Tape#run()', () => {
-  xit('must return a tape with result')
-  xit('must pipe cells and return a tape with result')
-  xit('must pipe cells and return a tape with error')
-  xit('must skip errors when strict mode disabled')
+  it('must return a tape with result', () => {
+    const tape = new Tape({ cells: [cell] }),
+          res = tape.run(new VM(), { state: 3 });
+    assert.equal(res, 0.982793723247329)
+  })
+  it('must pipe cells and return a tape with result', () => {
+    const tape = new Tape({ cells: [cell, cell, cell, cell] }),
+          res = tape.run(new VM(), { state: 180 });
+    assert.equal(res, 0.15855636399631293)
+  })
+  it('must pipe cells and return a tape with error', () => {
+    const tape = new Tape({ cells: [cell, new Cell({ ref: 'test', op: "return function() return 'abc' / 99 end" }), cell] })
+    assert.throws(_ => tape.run(new VM(), { state: 3 }), /^Lua Error/)
+  })
+  it('must skip errors when strict mode disabled', () => {
+    const tape = new Tape({ cells: [cell, new Cell({ ref: 'test', op: "return function() return 'abc' / 99 end" }), cell] }),
+          res = tape.run(new VM(), { state: 3, strict: false })
+    assert.equal(res, 0.4567414418361604)
+  })
 })
 
 
