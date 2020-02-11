@@ -1,6 +1,7 @@
 const { resolve } = require('path')
 const { assert } = require('chai')
 const Cell = require(resolve('lib/operate/cell'))
+const VM = require(resolve('lib/operate/vm'))
 
 
 describe('Cell.fromBPU()', () => {
@@ -29,32 +30,34 @@ describe('Cell.fromBPU()', () => {
 describe('Cell#exec()', () => {
   let vm, op;
   before(() => {
-    vm = null; // TODO setup VM
+    vm = new VM()
     op = `return function(state, y)
             x = state or 0
-            return math.pow(x, y)
+            y = tonumber(y)
+            return math.min(x, y)
           end`;
   })
 
-  xit('must return the correct sum', () => {
+  it('must return the correct sum', () => {
     const cell = new Cell({ op: "return function(state, a, b) return state + a + b end", params: [3, 5] })
     assert.equal(cell.exec(vm, { state: 1 }), 9)
   })
 
-  xit('must return the correct concatenated text', () => {
+  it('must return the correct concatenated text', () => {
     const cell = new Cell({ op: "return function(state) return state .. ' world' end", params: [] })
     assert.equal(cell.exec(vm, { state: 'hello' }), 'hello world')
   })
 
-  xit('must return a result', () => {
+  it('must return a result', () => {
     const cell = new Cell({ op, params: ['2'] })
-    assert.equal(cell.exec(vm, { state: 2 }), 4)
+    assert.equal(cell.exec(vm, { state: 2 }), 2)
   })
 
-  xit('must throw an error', () => {
+  it('must throw an error', () => {
     const cell = new Cell({ op, params: ['2'] })
-    // cell.exec(vm, { state: { foo: 'bar' } })
-    assert(false)
+    assert.throws(_ => {
+      cell.exec(vm, { state: { foo: 'bar' } })
+    }, /^Lua Error/)
   })
 })
 
