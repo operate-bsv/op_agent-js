@@ -2,6 +2,58 @@ const { resolve } = require('path')
 const { assert } = require('chai')
 const VM = require(resolve('lib/operate/vm'))
 
+
+describe('VM#get() and VM#set()', () => {
+  let vm;
+  before(() => {
+    vm = new VM()
+  })
+
+  it('must set and get a variable', () => {
+    vm.set('foo', 42)
+    const res = vm.get('foo')
+    assert.equal(res, 42)
+  })
+
+  it('must set and get a table', () => {
+    vm.set('foo.bar', 42)
+    const res = vm.get('foo')
+    assert.instanceOf(res, Map)
+    assert.equal(res.get('bar'), 42)
+  })
+
+  it('must set and get a table field', () => {
+    vm.set('foo.bar', 42)
+    const res = vm.get('foo.bar')
+    assert.equal(res, 42)
+  })  
+})
+
+
+describe('VM#setFunction()', () => {
+  let vm;
+  before(() => {
+    vm = new VM()
+  })
+
+  it('must set a callable function', () => {
+    vm.setFunction('foo', function(a,b) {
+      return a*b
+    })
+    const res = vm.call('foo', [3,5])
+    assert.equal(res, 15)
+  })
+
+  it('must set a callable function at the path', () => {
+    vm.setFunction('foo.bar', function(a,b) {
+      return a*b
+    })
+    const res = vm.call('foo.bar', [3,5])
+    assert.equal(res, 15)
+  })
+})
+
+
 describe('VM#eval()', () => {
   let vm;
   before(() => {
