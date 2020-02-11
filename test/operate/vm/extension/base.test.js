@@ -1,5 +1,6 @@
 const { resolve } = require("path");
 const VM = require(resolve("lib/operate/vm"));
+const { assert } = require("chai");
 const BaseExtension = require(resolve("lib/operate/vm/extension/base"));
 
 describe("base.encode16, base.decode16", () => {
@@ -10,7 +11,7 @@ describe("base.encode16, base.decode16", () => {
     });
   });
   it("must encode binary string as hex string", () => {
-    assert.equal(vm.eval(`return base.decode16('foo bar')`), "666f6f20626172");
+    assert.equal(vm.eval(`return base.encode16('foo bar')`), "666f6f20626172");
   });
   it("must encode hex string as binary string", () => {
     assert.equal(vm.eval(`return base.decode16('666f6f20626172')`), "foo bar");
@@ -27,7 +28,7 @@ describe("base.encode64, base.decode64", () => {
     });
   });
   it("must encode binary string as hex string", () => {
-    assert.equal(vm.eval(`return base.decode64('foo bar')`), "Zm9vIGJhcg==");
+    assert.equal(vm.eval(`return base.encode64('foo bar')`), "Zm9vIGJhcg==");
   });
   it("must encode hex string as binary string", () => {
     assert.equal(vm.eval(`return base.decode64('Zm9vIGJhcg==')`), "foo bar");
