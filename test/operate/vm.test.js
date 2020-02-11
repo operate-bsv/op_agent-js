@@ -5,7 +5,7 @@ const VM = require(resolve('lib/operate/vm'))
 
 describe('VM#get() and VM#set()', () => {
   let vm;
-  before(() => {
+  beforeEach(() => {
     vm = new VM()
   })
 
@@ -16,23 +16,27 @@ describe('VM#get() and VM#set()', () => {
   })
 
   it('must set and get a table', () => {
-    vm.set('foo.bar', 42)
+    vm.set('foo.bar', 42, { force: true })
     const res = vm.get('foo')
     assert.instanceOf(res, Map)
     assert.equal(res.get('bar'), 42)
   })
 
   it('must set and get a table field', () => {
-    vm.set('foo.bar', 42)
+    vm.set('foo.bar', 42, { force: true })
     const res = vm.get('foo.bar')
     assert.equal(res, 42)
-  })  
+  })
+
+  it('must throw error when setting deep without force', () => {
+    assert.throw(_ => vm.set('foo.bar', 42), 'Invalid Lua path.')
+  })
 })
 
 
 describe('VM#setFunction()', () => {
   let vm;
-  before(() => {
+  beforeEach(() => {
     vm = new VM()
   })
 
@@ -47,9 +51,17 @@ describe('VM#setFunction()', () => {
   it('must set a callable function at the path', () => {
     vm.setFunction('foo.bar', function(a,b) {
       return a*b
-    })
+    }, { force: true })
     const res = vm.call('foo.bar', [3,5])
     assert.equal(res, 15)
+  })
+
+  it('must throw error when setting deep without force', () => {
+    assert.throw(_ => {
+      vm.setFunction('foo.bar', function(a,b) {
+      return a*b
+    })
+    }, 'Invalid Lua path.')
   })
 })
 
