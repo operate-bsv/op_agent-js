@@ -1,6 +1,7 @@
 const { resolve } = require("path");
 const VM = require(resolve("lib/operate/vm"));
 const nock = require("nock");
+const { assert } = require("chai");
 const AgentExtension = require(resolve("lib/operate/vm/extension/agent"));
 
 let aliases;
@@ -20,21 +21,21 @@ describe("AgentExtension.loadTape, AgentExtension.runTape", () => {
     });
     nock("https://bob.planaria.network/")
       .get(/.*/)
-      .once()
+      .twice()
       .replyWithFile(200, "test/mocks/agent_exec_get_tape.json", {
         "Content-Type": "application/json"
       });
     nock("https://api.operatebsv.org/")
       .get(/.*/)
-      .once()
+      .twice()
       .replyWithFile(200, "test/mocks/agent_exec_get_ops.json", {
         "Content-Type": "application/json"
       });
   }),
-    it("must load and run and return value of given tape", async () => {
+    it("must load and run and return value of given tape", () => {
       const res = vm.eval(
         `local tape = agent.load_tape('65aa086b2c54d5d792973db425b70712a708a115cd71fb67bd780e8ad9513ac9')
-        // return agent.run_tape(tape)`
+        return agent.run_tape(tape)`
       );
       assert.equal(res, ["name", "numbers"]);
     }),
