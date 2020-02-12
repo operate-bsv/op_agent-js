@@ -18,13 +18,13 @@ describe('Operate.loadTape()', () => {
   before(() => {
     nock('https://bob.planaria.network/')
       .get(/.*/)
-      .once()
+      .twice()
       .replyWithFile(200, 'test/mocks/bob_fetch_tx.json', {
         'Content-Type': 'application/json'
       })
     nock('https://api.operatebsv.org/')
       .get(/.*/)
-      .once()
+      .twice()
       .replyWithFile(200, 'test/mocks/operate_load_tape_ops.json', {
         'Content-Type': 'application/json'
       })
@@ -40,7 +40,16 @@ describe('Operate.loadTape()', () => {
     assert.lengthOf(tape.cells, 3)
   })
 
-  xit('must load and run tape')
+  it('must load and run tape', async () => {
+    const tape = await Operate.loadTape(
+      '98be5010028302399999bfba0612ee51ea272e7a0eb3b45b4b8bef85f5317633',
+      { aliases }
+    )
+    const result = Operate.runTape(tape)
+    console.log('res', result)
+    assert.equal(result['app'], 'twetch')
+    assert.hasAllKeys(result, ['_MAP', '_AIP'])
+  })
 })
 
 
