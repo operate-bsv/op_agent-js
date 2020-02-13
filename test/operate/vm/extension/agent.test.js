@@ -3,6 +3,7 @@ const VM = require(resolve("lib/operate/vm"));
 const nock = require("nock");
 const { assert } = require("chai");
 const AgentExtension = require(resolve("lib/operate/vm/extension/agent"));
+const Agent = require(resolve("lib/operate/agent"));
 
 let aliases;
 before(() => {
@@ -17,6 +18,7 @@ describe("AgentExtension.loadTape, AgentExtension.runTape", () => {
   let vm;
   before(() => {
     vm = new VM({
+      agent: new Agent(),
       extensions: [AgentExtension]
     });
     nock("https://bob.planaria.network/")
