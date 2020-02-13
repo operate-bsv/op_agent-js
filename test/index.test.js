@@ -46,31 +46,17 @@ describe('Operate.loadTape()', () => {
       { aliases }
     )
     const result = Operate.runTape(tape)
-    console.log('res', result)
-    assert.equal(result['app'], 'twetch')
-    assert.hasAllKeys(result, ['_MAP', '_AIP'])
+    assert.equal(result.get('app'), 'twetch')
+    assert.include([...result.keys()], '_MAP')
+    assert.include([...result.keys()], '_AIP')
   })
 })
 
 
 describe('Operate.loadTapesBy()', () => {
+  let query
   before(() => {
-    nock('https://bob.planaria.network/')
-      .get(/.*/)
-      .once()
-      .replyWithFile(200, 'test/mocks/bob_fetch_tx_by.json', {
-        'Content-Type': 'application/json'
-      })
-    nock('https://api.operatebsv.org/')
-      .get(/.*/)
-      .thrice()
-      .replyWithFile(200, 'test/mocks/operate_load_tape_ops.json', {
-        'Content-Type': 'application/json'
-      })
-  })
-
-  it('must load and prepare valid tapes', async () => {
-    const query = {
+    query = {
       find: {
         'out.tape.cell': {
           $elemMatch: {
@@ -81,6 +67,21 @@ describe('Operate.loadTapesBy()', () => {
       },
       limit: 3
     }
+    nock('https://bob.planaria.network/')
+      .get(/.*/)
+      .twice()
+      .replyWithFile(200, 'test/mocks/bob_fetch_tx_by.json', {
+        'Content-Type': 'application/json'
+      })
+    nock('https://api.operatebsv.org/')
+      .get(/.*/)
+      .times(6)
+      .replyWithFile(200, 'test/mocks/operate_load_tape_ops.json', {
+        'Content-Type': 'application/json'
+      })
+  })
+
+  it('must load and prepare valid tapes', async () => {
     const tapes = await Operate.loadTapesBy(query, { aliases })
     assert.lengthOf(tapes, 3)
     assert.isTrue(tapes.every(tape => tape.isValid))
@@ -88,7 +89,12 @@ describe('Operate.loadTapesBy()', () => {
     assert.lengthOf(tapes[2].cells, 3)
   })
 
-  xit('must run all tapes')
+  it('must run all tapes', async () => {
+    const tapes = await Operate.loadTapesBy(query, { aliases })
+    tapes.forEach(t => Operate.runTape(t))
+    assert.lengthOf(tapes, 3)
+    assert(tapes.every(t => !!t.result))
+  })
 })
 
 
