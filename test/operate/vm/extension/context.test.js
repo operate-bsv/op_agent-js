@@ -51,7 +51,7 @@ describe("ContextExtension.txOutput", () => {
 describe("ContextExtension.getTape", () => {
   it("with state must return the current tape", () => {
     const res = vm.eval("return ctx.get_tape()");
-    assert.equal(res.length, 30);
+    assert.lengthOf(res, 28);
   });
   it("without state must return nil", () => {
     const res = vm2.eval("return ctx.get_tape()");
