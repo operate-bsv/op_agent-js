@@ -45,7 +45,7 @@ describe('Operate.loadTape()', () => {
       '98be5010028302399999bfba0612ee51ea272e7a0eb3b45b4b8bef85f5317633',
       { aliases }
     )
-    const result = Operate.runTape(tape)
+    const result = await Operate.runTape(tape)
     assert.equal(result.get('app'), 'twetch')
     assert.include([...result.keys()], '_MAP')
     assert.include([...result.keys()], '_AIP')
@@ -91,7 +91,9 @@ describe('Operate.loadTapesBy()', () => {
 
   it('must run all tapes', async () => {
     const tapes = await Operate.loadTapesBy(query, { aliases })
-    tapes.forEach(t => Operate.runTape(t))
+    for (let i = 0; i < tapes.length; i++) {
+      await Operate.runTape(tapes[i])
+    }
     assert.lengthOf(tapes, 3)
     assert(tapes.every(t => !!t.result))
   })
