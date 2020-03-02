@@ -4,11 +4,12 @@
   "description": "Operate JavaScript agent used to load and run Bitcoin programs.",
   "main": "lib/index.js",
   "browser": "dist.operate.min.js",
+  "homepage": "https://www.operatebsv.org",
   "repository": "github.com:operate-bsv/op_agent-js",
   "author": "Chronos Labs Ltd",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js",
+    "build": "rimraf dist && webpack --config ./webpack.config.js",
     "test": "mocha \"test/**/*.test.js\""
   },
   "dependencies": {
@@ -26,6 +27,7 @@
     "mocha": "^7.0.0",
     "nock": "^11.7.1",
     "regenerator-runtime": "^0.13.3",
+    "rimraf": "^3.0.2",
     "terser-webpack-plugin": "^2.3.5",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11"
