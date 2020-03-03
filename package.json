@@ -13,9 +13,9 @@
     "test": "mocha \"test/**/*.test.js\""
   },
   "dependencies": {
-    "axios": "^0.19.0",
     "bops": "^1.0.0",
-    "fengari": "^0.1.4"
+    "fengari": "^0.1.4",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

@@ -37,6 +37,10 @@ module.exports = [
       ]
     },
 
+    externals: {
+      'url': 'window'
+    },
+
     plugins: [
       new webpack.DefinePlugin({
         'process.env.FENGARICONF': 'void 0',
