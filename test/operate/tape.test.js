@@ -1,10 +1,14 @@
 const { resolve } = require('path')
-const { assert } = require('chai')
+const { assert } = chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
 const nock = require('nock')
 const Tape = require(resolve('lib/operate/tape'))
 const Cell = require(resolve('lib/operate/cell'))
 const VM = require(resolve('lib/operate/vm'))
 const OpApi = require(resolve('lib/operate/adapter/op_api'))
+
+chai.use(chaiAsPromised)
+
 
 let op, cell;
 before(() => {
@@ -82,23 +86,26 @@ describe('Tape.fromBPU()', () => {
 
 
 describe('Tape#run()', () => {
-  it('must return a tape with result', () => {
+  it('must return a tape with result', async () => {
     const tape = new Tape({ cells: [cell] }),
-          res = tape.run(new VM(), { state: 3 });
+          res = await tape.run(new VM(), { state: 3 });
     assert.equal(res, 0.982793723247329)
   })
-  it('must pipe cells and return a tape with result', () => {
+
+  it('must pipe cells and return a tape with result', async () => {
     const tape = new Tape({ cells: [cell, cell, cell, cell] }),
-          res = tape.run(new VM(), { state: 180 });
+          res = await tape.run(new VM(), { state: 180 });
     assert.equal(res, 0.15855636399631293)
   })
+
   it('must pipe cells and return a tape with error', () => {
     const tape = new Tape({ cells: [cell, new Cell({ ref: 'test', op: "return function() return 'abc' / 99 end" }), cell] })
-    assert.throws(_ => tape.run(new VM(), { state: 3 }), /^Lua Error/)
+    assert.isRejected(tape.run(new VM(), { state: 3 }), /^Lua Error/)
   })
-  it('must skip errors when strict mode disabled', () => {
+
+  it('must skip errors when strict mode disabled', async () => {
     const tape = new Tape({ cells: [cell, new Cell({ ref: 'test', op: "return function() return 'abc' / 99 end" }), cell] }),
-          res = tape.run(new VM(), { state: 3, strict: false })
+          res = await tape.run(new VM(), { state: 3, strict: false })
     assert.equal(res, 0.4567414418361604)
   })
 })

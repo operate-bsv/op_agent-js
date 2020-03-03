@@ -21,8 +21,8 @@ before(() => {
 describe('ContextExtension.txInput', () => {
   it('with state must return the input by index', () => {
     const res = vm.eval('return ctx.tx_input(0)')
-    assert.deepEqual(Object.keys(res), ['e', 'i', 'tape'])
-    assert.deepEqual(Object.keys(res.e), ['a', 'h', 'i'])
+    assert.deepEqual([...res.keys()], ['e', 'i', 'tape'])
+    assert.deepEqual([...res.get('e').keys()], ['a', 'h', 'i'])
   })
 
   it('out of range must return nil', () => {
@@ -40,8 +40,8 @@ describe('ContextExtension.txInput', () => {
 describe('ContextExtension.txOutput', () => {
   it('with state must return the output by index', () => {
     const res = vm.eval('return ctx.tx_output(1)')
-    assert.deepEqual(Object.keys(res), ['e', 'i', 'tape'])
-    assert.deepEqual(Object.keys(res.e), ['a', 'i', 'v'])
+    assert.deepEqual([...res.keys()], ['e', 'i', 'tape'])
+    assert.deepEqual([...res.get('e').keys()], ['a', 'i', 'v'])
   })
 
   it('out of range must return nil', () => {
@@ -72,13 +72,13 @@ describe('ContextExtension.getTape', () => {
 describe('ContextExtension.getCell', () => {
   it('without index must return the current cell', () => {
     const res = vm.eval('return ctx.get_cell()')
-    assert.equal(res[0].b, '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5')
+    assert.equal(res[0].get('b'), '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5')
     assert.equal(res.length, 16)
   })
 
   it('with index must return the requested cell', () => {
     const res = vm.eval('return ctx.get_cell(1)')
-    assert.equal(res[0].b, '19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut')
+    assert.equal(res[0].get('b'), '19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut')
     assert.equal(res.length, 5)
   })
 

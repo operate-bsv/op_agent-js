@@ -1,7 +1,10 @@
 const { resolve } = require('path')
-const { assert } = require('chai')
+const { assert } = chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
 const Cell = require(resolve('lib/operate/cell'))
 const VM = require(resolve('lib/operate/vm'))
+
+chai.use(chaiAsPromised)
 
 
 describe('Cell.fromBPU()', () => {
@@ -38,26 +41,27 @@ describe('Cell#exec()', () => {
           end`;
   })
 
-  it('must return the correct sum', () => {
-    const cell = new Cell({ op: "return function(state, a, b) return state + a + b end", params: [3, 5] })
-    assert.equal(cell.exec(vm, { state: 1 }), 9)
+  it('must return the correct sum', async () => {
+    const cell = new Cell({ op: "return function(state, a, b) return state + a + b end", params: [3, 5] }),
+          res = await cell.exec(vm, { state: 1 });
+    assert.equal(res, 9)
   })
 
-  it('must return the correct concatenated text', () => {
-    const cell = new Cell({ op: "return function(state) return state .. ' world' end", params: [] })
-    assert.equal(cell.exec(vm, { state: 'hello' }), 'hello world')
+  it('must return the correct concatenated text', async () => {
+    const cell = new Cell({ op: "return function(state) return state .. ' world' end", params: [] }),
+          res = await cell.exec(vm, { state: 'hello' });
+    assert.equal(res, 'hello world')
   })
 
-  it('must return a result', () => {
-    const cell = new Cell({ op, params: ['2'] })
-    assert.equal(cell.exec(vm, { state: 2 }), 2)
+  it('must return a result', async () => {
+    const cell = new Cell({ op, params: ['8'] }),
+          res = await cell.exec(vm, { state: 2 });
+    assert.equal(res, 2)
   })
 
   it('must throw an error', () => {
     const cell = new Cell({ op, params: ['2'] })
-    assert.throws(_ => {
-      cell.exec(vm, { state: { foo: 'bar' } })
-    }, /^Lua Error/)
+    assert.isRejected(cell.exec(vm, { state: { foo: 'bar' } }), /^Lua Error/)
   })
 })
 
