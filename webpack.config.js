@@ -38,6 +38,7 @@ module.exports = [
     },
 
     externals: {
+      '@trust/webcrypto': 'crypto',
       'url': 'window'
     },
 

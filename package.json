@@ -13,6 +13,7 @@
     "test": "mocha \"test/**/*.test.js\""
   },
   "dependencies": {
+    "@trust/webcrypto": "^0.9.2",
     "bops": "^1.0.0",
     "fengari": "^0.1.4",
     "node-fetch": "^2.6.0"

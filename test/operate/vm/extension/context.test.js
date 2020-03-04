@@ -1,7 +1,6 @@
 const { resolve } = require('path')
 const VM = require(resolve('lib/operate/vm'))
 const { assert } = require('chai')
-const ContextExtension = require(resolve('lib/operate/vm/extension/context'))
 const { _toBPU } = require(resolve('lib/operate/adapter/bob'))
 
 let vm, vm2;
