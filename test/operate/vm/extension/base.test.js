@@ -7,7 +7,7 @@ before(() => {
   vm = new VM()
 })
 
-describe('base.encode16, base.decode16', () => {  
+describe('BaseExtension.encode16, BaseExtension.decode16', () => {  
   it('must encode binary string as hex string', () => {
     assert.equal(vm.eval(`return base.encode16('foo bar')`), '666f6f20626172')
   })
@@ -21,7 +21,7 @@ describe('base.encode16, base.decode16', () => {
 })
 
 
-describe('base.encode64, base.decode64', () => {
+describe('BaseExtension.encode64, BaseExtension.decode64', () => {
   it('must encode binary string as hex string', () => {
     assert.equal(vm.eval(`return base.encode64('foo bar')`), 'Zm9vIGJhcg==')
   })
