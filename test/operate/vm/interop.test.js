@@ -1,7 +1,6 @@
 const { resolve } = require('path')
 const { assert } = require('chai')
 const { lua, to_luastring } = require('fengari')
-const binary = require('bops')
 const VM = require(resolve('lib/operate/vm'))
 const interop = require(resolve('lib/operate/vm/interop'))
 
@@ -38,7 +37,7 @@ describe('interop.push()', () => {
   })
 
   it('must push a binary string', () => {
-    interop.push(vm._vm, binary.from('hello world'))
+    interop.push(vm._vm, Buffer.from('hello world'))
     lua.lua_setglobal(vm._vm, to_luastring('test'))
     assert.isTrue(vm.eval("return test == 'hello world'"))
   })
@@ -112,6 +111,16 @@ describe('interop.tojs()', () => {
   it('must pull string', () => {
     vm.exec("return 'hello world'")
     assert.equal(interop.tojs(vm._vm, -1), 'hello world')
+  })
+
+  it('must pull binary string', () => {
+    interop.push(vm._vm, Buffer.from('2aae6c35c94fcfb415dbe95f408b9ce91ee846ed', 'hex'))
+    lua.lua_setglobal(vm._vm, to_luastring('test'))
+    vm.exec("return test")
+    const res = interop.tojs(vm._vm, -1)
+    assert.instanceOf(res, Buffer)
+    assert.lengthOf(res, 20)
+    assert.equal(res.toString('hex'), '2aae6c35c94fcfb415dbe95f408b9ce91ee846ed')
   })
 
   it('must pull simple table', () => {

@@ -14,8 +14,8 @@ before(() => {
 describe('Crypto.aesEncrypt() and Crypto.aesDecrypt()', () => {
   it('must encrypt and decrypt with this aes key', async () => {
     const res = await vm.evalAsync(`
-    enc_data = crypto.aes.encrypt('hello world', aes_key, { encoding = 'hex' })
-    return crypto.aes.decrypt(enc_data, aes_key, { encoding = 'hex' })
+    enc_data = crypto.aes.encrypt('hello world', aes_key)
+    return crypto.aes.decrypt(enc_data, aes_key)
     `)
     assert.equal(res, 'hello world')
   })
