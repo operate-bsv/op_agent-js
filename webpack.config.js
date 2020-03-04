@@ -38,7 +38,7 @@ module.exports = [
     },
 
     externals: {
-      '@trust/webcrypto': 'crypto',
+      'isomorphic-webcrypto': 'crypto',
       'url': 'window'
     },
 
