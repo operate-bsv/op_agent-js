@@ -13,11 +13,13 @@
     "test": "mocha \"test/**/*.test.js\""
   },
   "dependencies": {
+    "bigint-polyfill": "^0.1.0",
     "bops": "^1.0.0",
     "fengari": "^0.1.4",
     "isomorphic-webcrypto": "^2.3.5",
     "isutf8": "^2.1.0",
     "noble-ripemd160": "^0.1.1",
+    "noble-secp256k1": "^0.3.1",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
@@ -28,7 +30,6 @@
     "chai-as-promised": "^7.1.1",
     "mocha": "^7.0.0",
     "nock": "^11.7.1",
-    "regenerator-runtime": "^0.13.3",
     "rimraf": "^3.0.2",
     "terser-webpack-plugin": "^2.3.5",
     "webpack": "^4.42.0",

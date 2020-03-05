@@ -17,7 +17,7 @@ before(() => {
 })
 
 
-describe('ContextExtension.txInput', () => {
+describe('ContextExt.txInput', () => {
   it('with state must return the input by index', () => {
     const res = vm.eval('return ctx.tx_input(0)')
     assert.deepEqual([...res.keys()], ['e', 'i', 'tape'])
@@ -36,7 +36,7 @@ describe('ContextExtension.txInput', () => {
 })
 
 
-describe('ContextExtension.txOutput', () => {
+describe('ContextExt.txOutput', () => {
   it('with state must return the output by index', () => {
     const res = vm.eval('return ctx.tx_output(1)')
     assert.deepEqual([...res.keys()], ['e', 'i', 'tape'])
@@ -55,7 +55,7 @@ describe('ContextExtension.txOutput', () => {
 })
 
 
-describe('ContextExtension.getTape', () => {
+describe('ContextExt.getTape', () => {
   it('with state must return the current tape', () => {
     const res = vm.eval('return ctx.get_tape()')
     assert.lengthOf(res, 28)
@@ -68,7 +68,7 @@ describe('ContextExtension.getTape', () => {
 })
 
 
-describe('ContextExtension.getCell', () => {
+describe('ContextExt.getCell', () => {
   it('without index must return the current cell', () => {
     const res = vm.eval('return ctx.get_cell()')
     assert.equal(res[0].get('b'), '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5')

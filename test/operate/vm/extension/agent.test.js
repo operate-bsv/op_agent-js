@@ -14,7 +14,7 @@ before(() => {
 })
 
 
-describe('AgentExtension.loadTape, AgentExtension.runTape', () => {
+describe('AgentExt.loadTape, AgentExt.runTape', () => {
   let vm;
   before(() => {
     vm = new VM({ agent: new Agent() })

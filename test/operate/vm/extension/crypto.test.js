@@ -9,30 +9,7 @@ before(() => {
 })
 
 
-describe('Crypto.hash()', () => {
-  it('must create a ripemd160 hash', () => {
-    const res = vm.eval("return crypto.hash.ripemd160('hello world')")
-    assert.equal(res.toString('hex'), '98c615784ccb5fe5936fbc0cbe9dfdb408d92f0f')
-  })
-
-  it('must create a sha1 hash', async () => {
-    const res = await vm.evalAsync("return crypto.hash.sha1('hello world')")
-    assert.equal(res.toString('hex'), '2aae6c35c94fcfb415dbe95f408b9ce91ee846ed')
-  })
-
-  it('must create a sha256 hash', async () => {
-    const res = await vm.evalAsync("return crypto.hash.sha256('hello world')")
-    assert.equal(res.toString('hex'), 'b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9')
-  })
-
-  it('must create a sha512 hash', async () => {
-    const res = await vm.evalAsync("return crypto.hash.sha512('hello world')")
-    assert.equal(res.toString('hex'), '309ecc489c12d6eb4cc40f50c902f2b4d0ed77ee511a7c7a9bcd3ca86d4cd86f989dd35bc5ff499670da34255b45b0cfd830e81f605dcf7dc5542e93ae9cd76f')
-  })
-})
-
-
-describe('Crypto.aesEncrypt() and Crypto.aesDecrypt()', () => {
+describe('CryptoExt.aesEncrypt() and CryptoExt.aesDecrypt()', () => {
   before(() => {
     vm.set('aes_key', interop.wrap({
       kty: 'oct',
@@ -42,7 +19,7 @@ describe('Crypto.aesEncrypt() and Crypto.aesDecrypt()', () => {
     }))
   })
 
-  it('must encrypt and decrypt with this aes key', async () => {
+  it('must encrypt and decrypt with the aes key', async () => {
     const res = await vm.evalAsync(`
     enc_data = crypto.aes.encrypt('hello world', aes_key)
     return crypto.aes.decrypt(enc_data, aes_key)
@@ -52,7 +29,55 @@ describe('Crypto.aesEncrypt() and Crypto.aesDecrypt()', () => {
 })
 
 
-describe('Crypto.rsaEncrypt() and Crypto.rsaDecrypt()', () => {
+describe('CryptoExt.eciesEncrypt() and CryptoExt.eciesDecrypt()', () => {
+  before(() => {
+    vm.set('ecdsa_pub_key', interop.wrap(
+      Buffer.from('0296207d8752d01b1cf8de77d258c02dd7280edc2bce9b59023311bbd395cbe93a', 'hex')
+    ))
+    vm.set('ecdsa_priv_key', interop.wrap(
+      Buffer.from('bd8a6a5d1630b0da3d5424ebab18f69f18226d32dd1c884e78b83cdddf839e2c', 'hex')
+    ))
+  })
+
+  it('must encrypt with public key and decrypt with private key', async () => {
+    const res = await vm.evalAsync(`
+    enc_data = crypto.ecies.encrypt('hello world', ecdsa_pub_key)
+    return crypto.ecies.decrypt(enc_data, ecdsa_priv_key)
+    `)
+    assert.equal(res, 'hello world')
+  })
+})
+
+
+describe('CryptoExt.ecdsaSign() and CryptoExt.ecdsaVerify()', () => {
+  before(() => {
+    vm.set('ecdsa_pub_key', interop.wrap(
+      Buffer.from('0296207d8752d01b1cf8de77d258c02dd7280edc2bce9b59023311bbd395cbe93a', 'hex')
+    ))
+    vm.set('ecdsa_priv_key', interop.wrap(
+      Buffer.from('bd8a6a5d1630b0da3d5424ebab18f69f18226d32dd1c884e78b83cdddf839e2c', 'hex')
+    ))
+  })
+
+  it('must sign and verify message', () => {
+    const res = vm.eval(`
+    sig = crypto.ecdsa.sign('hello world', ecdsa_priv_key)
+    return crypto.ecdsa.verify(sig, 'hello world', ecdsa_pub_key)
+    `)
+    assert.isTrue(res)
+  })
+
+  it('wont verify when different message', () => {
+    const res = vm.eval(`
+    sig = crypto.ecdsa.sign('hello world', ecdsa_priv_key)
+    return crypto.ecdsa.verify(sig, 'goodbye world', ecdsa_pub_key)
+    `)
+    assert.isFalse(res)
+  })
+})
+
+
+describe('CryptoExt.rsaEncrypt() and CryptoExt.rsaDecrypt()', () => {
   before(() => {
     vm.set('rsa_pub_key', interop.wrap({
       kty: 'RSA',
@@ -86,7 +111,7 @@ describe('Crypto.rsaEncrypt() and Crypto.rsaDecrypt()', () => {
 })
 
 
-describe('Crypto.sign() and Crypto.verify()', () => {
+describe('CryptoExt.rsaSign() and CryptoExt.rsaVerify()', () => {
   before(() => {
     vm.set('rsa_pub_key', interop.wrap({
       kty: 'RSA',
@@ -124,5 +149,65 @@ describe('Crypto.sign() and Crypto.verify()', () => {
     return crypto.rsa.verify(sig, 'goodbye world', rsa_pub_key)
     `)
     assert.isFalse(res)
+  })
+})
+
+
+describe('CryptoExt.bitcoinMessageSign() and CryptoExt.bitcoinMessageVerify()', () => {
+  before(() => {
+    vm.set('bsv_pub_key', interop.wrap(
+      Buffer.from('0296207d8752d01b1cf8de77d258c02dd7280edc2bce9b59023311bbd395cbe93a', 'hex')
+    ))
+    vm.set('bsv_priv_key', interop.wrap(
+      Buffer.from('bd8a6a5d1630b0da3d5424ebab18f69f18226d32dd1c884e78b83cdddf839e2c', 'hex')
+    ))
+    vm.set('bsv_address', '15KgnG69mTbtkx73vNDNUdrWuDhnmfCxsf')
+  })
+
+  xit('must sign and verify message', async () => {
+    const res = await vm.evalAsync(`
+    sig = crypto.bitcoin_message.sign('hello world', bsv_priv_key)
+    return crypto.bitcoin_message.verify(sig, 'hello world', bsv_pub_key)
+    `)
+    assert.isTrue(res)
+  })
+
+  xit('must verify message with address', async () => {
+    const res = await vm.evalAsync(`
+    sig = crypto.bitcoin_message.sign('hello world', bsv_priv_key)
+    return crypto.bitcoin_message.verify(sig, 'hello world', bsv_address)
+    `)
+    assert.isTrue(res)
+  })
+
+  xit('wont verify when different message', async () => {
+    const res = await vm.evalAsync(`
+    sig = crypto.bitcoin_message.sign('hello world', bsv_priv_key)
+    return crypto.bitcoin_message.verify(sig, 'goodbye world', bsv_pub_key)
+    `)
+    assert.isFalse(res)
+  })
+})
+
+
+describe('CryptoExt.hash()', () => {
+  it('must create a ripemd160 hash', () => {
+    const res = vm.eval("return crypto.hash.ripemd160('hello world')")
+    assert.equal(res.toString('hex'), '98c615784ccb5fe5936fbc0cbe9dfdb408d92f0f')
+  })
+
+  it('must create a sha1 hash', async () => {
+    const res = await vm.evalAsync("return crypto.hash.sha1('hello world')")
+    assert.equal(res.toString('hex'), '2aae6c35c94fcfb415dbe95f408b9ce91ee846ed')
+  })
+
+  it('must create a sha256 hash', async () => {
+    const res = await vm.evalAsync("return crypto.hash.sha256('hello world')")
+    assert.equal(res.toString('hex'), 'b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9')
+  })
+
+  it('must create a sha512 hash', async () => {
+    const res = await vm.evalAsync("return crypto.hash.sha512('hello world')")
+    assert.equal(res.toString('hex'), '309ecc489c12d6eb4cc40f50c902f2b4d0ed77ee511a7c7a9bcd3ca86d4cd86f989dd35bc5ff499670da34255b45b0cfd830e81f605dcf7dc5542e93ae9cd76f')
   })
 })
