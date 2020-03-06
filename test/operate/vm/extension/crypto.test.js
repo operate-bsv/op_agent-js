@@ -59,16 +59,16 @@ describe('CryptoExt.ecdsaSign() and CryptoExt.ecdsaVerify()', () => {
     ))
   })
 
-  it('must sign and verify message', () => {
-    const res = vm.eval(`
+  it('must sign and verify message', async () => {
+    const res = await vm.evalAsync(`
     sig = crypto.ecdsa.sign('hello world', ecdsa_priv_key)
     return crypto.ecdsa.verify(sig, 'hello world', ecdsa_pub_key)
     `)
     assert.isTrue(res)
   })
 
-  it('wont verify when different message', () => {
-    const res = vm.eval(`
+  it('wont verify when different message', async () => {
+    const res = await vm.evalAsync(`
     sig = crypto.ecdsa.sign('hello world', ecdsa_priv_key)
     return crypto.ecdsa.verify(sig, 'goodbye world', ecdsa_pub_key)
     `)
@@ -164,7 +164,7 @@ describe('CryptoExt.bitcoinMessageSign() and CryptoExt.bitcoinMessageVerify()', 
     vm.set('bsv_address', '15KgnG69mTbtkx73vNDNUdrWuDhnmfCxsf')
   })
 
-  xit('must sign and verify message', async () => {
+  it('must sign and verify message', async () => {
     const res = await vm.evalAsync(`
     sig = crypto.bitcoin_message.sign('hello world', bsv_priv_key)
     return crypto.bitcoin_message.verify(sig, 'hello world', bsv_pub_key)
@@ -172,7 +172,7 @@ describe('CryptoExt.bitcoinMessageSign() and CryptoExt.bitcoinMessageVerify()', 
     assert.isTrue(res)
   })
 
-  xit('must verify message with address', async () => {
+  it('must verify message with address', async () => {
     const res = await vm.evalAsync(`
     sig = crypto.bitcoin_message.sign('hello world', bsv_priv_key)
     return crypto.bitcoin_message.verify(sig, 'hello world', bsv_address)
@@ -180,7 +180,7 @@ describe('CryptoExt.bitcoinMessageSign() and CryptoExt.bitcoinMessageVerify()', 
     assert.isTrue(res)
   })
 
-  xit('wont verify when different message', async () => {
+  it('wont verify when different message', async () => {
     const res = await vm.evalAsync(`
     sig = crypto.bitcoin_message.sign('hello world', bsv_priv_key)
     return crypto.bitcoin_message.verify(sig, 'goodbye world', bsv_pub_key)
@@ -191,8 +191,8 @@ describe('CryptoExt.bitcoinMessageSign() and CryptoExt.bitcoinMessageVerify()', 
 
 
 describe('CryptoExt.hash()', () => {
-  it('must create a ripemd160 hash', () => {
-    const res = vm.eval("return crypto.hash.ripemd160('hello world')")
+  it('must create a ripemd160 hash', async () => {
+    const res = await vm.evalAsync("return crypto.hash.ripemd160('hello world')")
     assert.equal(res.toString('hex'), '98c615784ccb5fe5936fbc0cbe9dfdb408d92f0f')
   })
 

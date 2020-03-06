@@ -3,8 +3,13 @@ const webpack = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
 const pkg = require('./package.json')
 
-const config = {
+module.exports = {
   mode: 'production',
+
+  entry: {
+    'operate': resolve(__dirname, 'lib/index.js'),
+    'operate.min': resolve(__dirname, 'lib/index.js')
+  },
 
   output: {
     path: resolve(__dirname, 'dist'),
@@ -17,16 +22,26 @@ const config = {
 
   externals: {
     'isomorphic-webcrypto': 'crypto',
-    'url': 'window'
+    'url': 'global'
+  },
+
+  module: {
+    rules: [{
+      test: [/\.js$/],
+      loader: 'babel-loader',
+      options: {
+        plugins: [
+          '@babel/plugin-proposal-nullish-coalescing-operator',
+          '@babel/plugin-proposal-optional-chaining'
+        ]
+      }
+    }]
   },
 
   plugins: [
     new webpack.DefinePlugin({
       'process.env.FENGARICONF': 'void 0',
       'typeof process': JSON.stringify('undefined')
-    }),
-    new webpack.ProvidePlugin({
-      BigInt: 'bigint-polyfill'
     }),
     new webpack.BannerPlugin({
       banner: `Operate / Agent - v${ pkg.version }\n${ pkg.description }\n${ pkg.repository }\nCopyright © ${ new Date().getFullYear() } ${ pkg.author }. MIT License.\n@preserve`
@@ -55,35 +70,3 @@ const config = {
     hints: false
   }
 }
-
-module.exports = [
-  {
-    ...config,
-    entry: {
-      'operate': resolve(__dirname, 'lib/index.js'),
-      'operate.min': resolve(__dirname, 'lib/index.js')
-    }
-  },
-  {
-    ...config,
-    entry: {
-      'operate.ie11.min': resolve(__dirname, 'lib/index.js')
-    },
-    module: {
-      rules: [
-        {
-          test: [/\.js$/],
-          loader: 'babel-loader',
-          exclude: /node_modules/,
-          options: {
-            presets: [['@babel/preset-env', {
-              targets: {
-                browsers: ['last 2 versions', 'not safari <= 7', 'not ie <= 10']
-              }
-            }]]
-          }
-        }
-      ]
-    }
-  }
-]
