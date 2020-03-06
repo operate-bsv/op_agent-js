@@ -22,7 +22,7 @@ module.exports = {
 
   externals: {
     'isomorphic-webcrypto': 'crypto',
-    'url': 'global'
+    'url': 'window'
   },
 
   module: {
