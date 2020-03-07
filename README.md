@@ -11,6 +11,7 @@ Operate is a toolset to help developers build applications, games and services o
 More infomation:
 
 * [Project website](https://www.operatebsv.org)
+* [API documentation](https://operate-bsv.github.io/op_agent-js)
 
 ## License
 
