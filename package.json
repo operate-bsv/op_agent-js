@@ -10,6 +10,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf dist && webpack --config ./webpack.config.js",
+    "docs": "jsdoc README.md lib/index.js lib/operate/ -r -d docs",
     "test": "mocha \"test/**/*.test.js\""
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "jsdoc": "^3.6.3",
     "mocha": "^7.0.0",
     "nock": "^11.7.1",
     "rimraf": "^3.0.2",
