@@ -1,23 +1,26 @@
 const { resolve } = require('path')
-const VM = require(resolve('lib/operate/vm'))
-const nock = require('nock')
 const { assert } = require('chai')
+const nock = require('nock')
+const VM = require(resolve('lib/operate/vm'))
 const Agent = require(resolve('lib/operate/agent'))
+const Cell = require(resolve('lib/operate/cell'))
+const util = require(resolve('lib/operate/util'))
 
-let aliases
+let agent
 before(() => {
-  aliases = {
+  const aliases = {
     '19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut': '6232de04',
     '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5': '1fec30d4',
     '15PciHG22SNLQJXMoSUaWVi7WSqc7hCfva': 'a3a83843'
   }
+  agent = new Agent({ aliases })
 })
 
 
 describe('AgentExt.loadTape, AgentExt.runTape', () => {
-  let vm;
+  let vm
   before(() => {
-    vm = new VM({ agent: new Agent() })
+    vm = new VM({ agent })
     nock('https://bob.planaria.network/')
       .get(/.*/)
       .twice()
@@ -47,5 +50,89 @@ describe('AgentExt.loadTape, AgentExt.runTape', () => {
       return agent.run_tape(tape, {state = {'testing'}})`
     )
     assert.include(res.get('numbers'), 'testing')
+  })
+})
+
+
+describe('AgentExt.loadTape, AgentExt.runTape', () => {
+  let vm
+  before(() => {
+    vm = new VM({ agent })
+
+    nock('https://bob.planaria.network/')
+      .get(/.*/)
+      .once()
+      .replyWithFile(200, 'test/mocks/bob_fetch_tx_by.json', {
+        'Content-Type': 'application/json'
+      })
+    nock('https://api.operatebsv.org/')
+      .get(/.*/)
+      .thrice()
+      .replyWithFile(200, 'test/mocks/operate_load_tape_ops.json', {
+        'Content-Type': 'application/json'
+      })
+  })
+
+  it('must load and run tapes from a given query', async () => {
+    const res = await vm.evalAsync(`
+      local query = { find = {}, limit = 3 }
+      query.find['out.tape.cell'] = {}
+      query.find['out.tape.cell']['$elemMatch'] = {
+        i = 0,
+        s = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5'
+      }
+      local opts = {
+        tape_adapter = {
+          'Operate.Adapter.Bob',
+          {api_key = 'foo'}
+        }
+      }
+      local tapes = agent.load_tapes_by(query, opts)
+      local results = {}
+      for i, tape in ipairs(tapes) do
+        local res = agent.run_tape(tape)
+        table.insert(results, res)
+      end
+      return results
+    `)
+    const apps = res.map(r => r.get('app'))
+    assert.deepEqual(apps, ['tonicpow', 'twetch', 'twetch'])
+  })
+})
+
+
+describe('AgentExt.loadTape, AgentExt.runTape', () => {
+  let vm, tape;
+  before(async () => {
+    vm = new VM({ agent })
+    nock('https://api.operatebsv.org/')
+      .get(/.*/)
+      .thrice()
+      .replyWithFile(200, 'test/mocks/agent_local_tape_load_ops.json', {
+        'Content-Type': 'application/json'
+      })
+
+    const script = `
+      return function(state)
+        local t1 = agent.local_tape(1)
+        local t2 = agent.local_tape(2)
+        return {
+          foo = agent.run_tape(t1),
+          bar = agent.run_tape(t2)
+        }
+      end`
+
+    const tx = require(resolve('test/mocks/operate_load_tape_indexed.json')).u[0]
+    tape = await agent._prepTape(tx, 0)
+    tape.cells = [
+      new Cell({ ref: 'test', op: script, index: 0, dataIndex: 1 })
+    ]
+  })
+
+  it('must get and run tapes from local context', async () => {
+    let res = await agent.runTape(tape)
+    res = util.mapToObject(res)
+    assert.deepEqual(res.foo, { baz: 'qux' })
+    assert.deepEqual(res.bar, { quux: 'garply' })
   })
 })

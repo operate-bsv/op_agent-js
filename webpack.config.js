@@ -55,8 +55,10 @@ module.exports = {
         include: /\.min\.js$/,
         extractComments: false,
         terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true,
           mangle: {
-            reserved: ['Operate', 'Agent', 'VM', 'Tape', 'Cell', 'Adapter', 'Cache', 'Extension']
+            reserved: ['Operate', 'Agent', 'VM', 'Tape', 'Cell']
           },
           output: {
             comments: /@preserve/i

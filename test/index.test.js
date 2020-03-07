@@ -4,6 +4,7 @@ const nock = require('nock')
 const Operate = require(resolve('lib/index'))
 const Agent = require(resolve('lib/operate/agent'))
 const Tape = require(resolve('lib/operate/tape'))
+const util = require(resolve('lib/operate/util'))
 
 let aliases
 before(() => {
@@ -49,6 +50,36 @@ describe('Operate.loadTape()', () => {
     assert.equal(result.get('app'), 'twetch')
     assert.include([...result.keys()], '_MAP')
     assert.include([...result.keys()], '_AIP')
+  })
+})
+
+
+describe('Operate.loadTape() using txid with output index', () => {
+  before(() => {
+    nock('https://bob.planaria.network/')
+      .get(/.*/)
+      .twice()
+      .replyWithFile(200, 'test/mocks/operate_load_tape_indexed.json', {
+        'Content-Type': 'application/json'
+      })
+    nock('https://api.operatebsv.org/')
+      .get(/.*/)
+      .twice()
+      .replyWithFile(200, 'test/mocks/agent_local_tape_load_ops.json', {
+        'Content-Type': 'application/json'
+      })
+  })
+
+  it('must load and run the correct tape', async () => {
+    const res1 = await Operate.loadTape('abcdef/1')
+      .then(t => Operate.runTape(t))
+      .then(r => util.mapToObject(r))
+    const res2 = await Operate.loadTape('abcdef/2')
+      .then(t => Operate.runTape(t))
+      .then(r => util.mapToObject(r))
+
+    assert.deepEqual(res1, {baz: 'qux'})
+    assert.deepEqual(res2, {quux: 'garply'})
   })
 })
 
