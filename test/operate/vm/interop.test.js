@@ -167,7 +167,7 @@ describe('interop.tojs()', () => {
     assert.equal(res[2].get('bish'), 'bash')
   })
 
-  it('must pull a function', () => {
+  it('must pull a function', async () => {
     vm.exec(`
     return function(a, b)
       return a * b
@@ -175,9 +175,11 @@ describe('interop.tojs()', () => {
     `)
     const func = interop.tojs(vm._vm, -1)
     assert.equal(func(3, 5), 15)
+    assert.equal(func.invoke(3, 5), 15)
+    assert.equal(await func.invokeAsync(3, 5), 15)
   })
 
-  it('must pull a function with multiple returns', () => {
+  it('must pull a function with multiple returns', async () => {
     vm.exec(`
     return function(a, b)
       local res = a * b
@@ -185,7 +187,8 @@ describe('interop.tojs()', () => {
     end
     `)
     const func = interop.tojs(vm._vm, -1)
+    assert.deepEqual(func(3, 5), [15, 'foo bar'])
     assert.deepEqual(func.invoke(3, 5), [15, 'foo bar'])
-    assert.deepEqual(func(3, 7), 21)
+    assert.deepEqual(await func.invokeAsync(3, 5), [15, 'foo bar'])
   })
 })
