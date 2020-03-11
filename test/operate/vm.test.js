@@ -17,7 +17,7 @@ describe('VM#get() and VM#set()', () => {
 
   it('must set and get a table', () => {
     vm.set('foo.bar', 42, { force: true })
-    const res = vm.get('foo', { decode: true })
+    const res = vm.get('foo')
     assert.instanceOf(res, Map)
     assert.equal(res.get('bar'), 42)
   })
@@ -114,13 +114,13 @@ describe('VM#execFunction()', () => {
     vm = new VM()
   })
 
-  it('must call the function and return a value', () => {
-    const fn = vm.eval("return function(a,b) return a * b end", { decode: true })
-    const res = fn(3,5)
+  it('must call the function and return a value', async () => {
+    const fn = vm.eval("return function(a,b) return a * b end")
+    const res = await fn(3,5)
     assert.equal(res, 15)
   })
 
-  it('must be able to call nested functions in the returned result', () => {
+  it('must be able to call nested functions in the returned result', async () => {
     const script = `
     return function(a,b)
       local m = {
@@ -137,12 +137,12 @@ describe('VM#execFunction()', () => {
       return m
     end
     `
-    const fn = vm.eval(script, { decode: true })
-    const res = fn(3,5)
+    const fn = vm.eval(script)
+    const res = await fn(3,5)
 
     assert.equal(res.get('a'), 3)
     assert.equal(res.get('b'), 5)
-    assert.equal(res.get('sum')(), 8)
-    assert.equal(res.get('mul')(), 15)
+    assert.equal(await res.get('sum')(), 8)
+    assert.equal(await res.get('mul')(), 15)
   })
 })

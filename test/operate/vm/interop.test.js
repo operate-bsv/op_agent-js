@@ -174,7 +174,8 @@ describe('interop.tojs()', () => {
     end
     `)
     const func = interop.tojs(vm._vm, -1)
-    assert.equal(func(3, 5), 15)
+    assert.instanceOf(func(3, 5), Promise)
+    assert.equal(await func(3, 5), 15)
     assert.equal(func.invoke(3, 5), 15)
     assert.equal(await func.invokeAsync(3, 5), 15)
   })
@@ -187,7 +188,8 @@ describe('interop.tojs()', () => {
     end
     `)
     const func = interop.tojs(vm._vm, -1)
-    assert.deepEqual(func(3, 5), [15, 'foo bar'])
+    assert.instanceOf(func(3, 5), Promise)
+    assert.deepEqual(await func(3, 5), [15, 'foo bar'])
     assert.deepEqual(func.invoke(3, 5), [15, 'foo bar'])
     assert.deepEqual(await func.invokeAsync(3, 5), [15, 'foo bar'])
   })

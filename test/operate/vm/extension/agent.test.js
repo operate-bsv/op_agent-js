@@ -35,23 +35,21 @@ describe('AgentExt.loadTape, AgentExt.runTape', () => {
   })
 
   it('must load and run and return value of given tape', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         local tape = agent.load_tape('65aa086b2c54d5d792973db425b70712a708a115cd71fb67bd780e8ad9513ac9')
         return agent.run_tape(tape)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.include([...res.keys()], 'name')
     assert.include([...res.keys()], 'numbers')
   })
 
   it('must build on the given state', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         local tape = agent.load_tape('65aa086b2c54d5d792973db425b70712a708a115cd71fb67bd780e8ad9513ac9')
         return agent.run_tape(tape, {state = {'testing'}})
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.include(res.get('numbers'), 'testing')
   })
 })

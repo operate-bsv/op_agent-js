@@ -83,12 +83,11 @@ describe('CryptoExt.aesEncrypt() and CryptoExt.aesDecrypt()', () => {
 
 describe('CryptoExt.eciesEncrypt() and CryptoExt.eciesDecrypt()', () => {
   it('must encrypt with public key and decrypt with private key', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         enc_data = crypto.ecies.encrypt('hello world', ecdsa_pub_key)
         return crypto.ecies.decrypt(enc_data, ecdsa_priv_key)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.equal(res, 'hello world')
   })
 })
@@ -96,22 +95,20 @@ describe('CryptoExt.eciesEncrypt() and CryptoExt.eciesDecrypt()', () => {
 
 describe('CryptoExt.ecdsaSign() and CryptoExt.ecdsaVerify()', () => {
   it('must sign and verify message', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         sig = crypto.ecdsa.sign('hello world', ecdsa_priv_key)
         return crypto.ecdsa.verify(sig, 'hello world', ecdsa_pub_key)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.isTrue(res)
   })
 
   it('wont verify when different message', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         sig = crypto.ecdsa.sign('hello world', ecdsa_priv_key)
         return crypto.ecdsa.verify(sig, 'goodbye world', ecdsa_pub_key)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.isFalse(res)
   })
 })
@@ -119,12 +116,11 @@ describe('CryptoExt.ecdsaSign() and CryptoExt.ecdsaVerify()', () => {
 
 describe('CryptoExt.rsaEncrypt() and CryptoExt.rsaDecrypt()', () => {
   it('must encrypt with public key and decrypt with private key', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         enc_data = crypto.rsa.encrypt('hello world', rsa_pub_key)
         return crypto.rsa.decrypt(enc_data, rsa_priv_key)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.equal(res, 'hello world')
   })
 })
@@ -132,22 +128,20 @@ describe('CryptoExt.rsaEncrypt() and CryptoExt.rsaDecrypt()', () => {
 
 describe('CryptoExt.rsaSign() and CryptoExt.rsaVerify()', () => {
   it('must sign and verify message', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         sig = crypto.rsa.sign('hello world', rsa_priv_key)
         return crypto.rsa.verify(sig, 'hello world', rsa_pub_key)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.isTrue(res)
   })
 
   it('wont verify when different message', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         sig = crypto.rsa.sign('hello world', rsa_priv_key)
         return crypto.rsa.verify(sig, 'goodbye world', rsa_pub_key)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.isFalse(res)
   })
 })
@@ -155,32 +149,29 @@ describe('CryptoExt.rsaSign() and CryptoExt.rsaVerify()', () => {
 
 describe('CryptoExt.bitcoinMessageSign() and CryptoExt.bitcoinMessageVerify()', () => {
   it('must sign and verify message', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         sig = crypto.bitcoin_message.sign('hello world', bsv_priv_key)
         return crypto.bitcoin_message.verify(sig, 'hello world', bsv_pub_key)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.isTrue(res)
   })
 
   it('must verify message with address', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         sig = crypto.bitcoin_message.sign('hello world', bsv_priv_key)
         return crypto.bitcoin_message.verify(sig, 'hello world', bsv_address)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.isTrue(res)
   })
 
   it('wont verify when different message', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         sig = crypto.bitcoin_message.sign('hello world', bsv_priv_key)
         return crypto.bitcoin_message.verify(sig, 'goodbye world', bsv_pub_key)
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.isFalse(res)
   })
 })
@@ -188,38 +179,34 @@ describe('CryptoExt.bitcoinMessageSign() and CryptoExt.bitcoinMessageVerify()', 
 
 describe('CryptoExt.hash()', () => {
   it('must create a ripemd160 hash', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         return crypto.hash.ripemd160('hello world')
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.equal(res.toString('hex'), '98c615784ccb5fe5936fbc0cbe9dfdb408d92f0f')
   })
 
   it('must create a sha1 hash', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         return crypto.hash.sha1('hello world')
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.equal(res.toString('hex'), '2aae6c35c94fcfb415dbe95f408b9ce91ee846ed')
   })
 
   it('must create a sha256 hash', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         return crypto.hash.sha256('hello world')
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.equal(res.toString('hex'), 'b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9')
   })
 
   it('must create a sha512 hash', async () => {
-    const fn = vm.eval(`
+    const res = await vm.eval(`
       return function()
         return crypto.hash.sha512('hello world')
-      end`)
-    const res = await fn.invokeAsync()
+      end`)()
     assert.equal(res.toString('hex'), '309ecc489c12d6eb4cc40f50c902f2b4d0ed77ee511a7c7a9bcd3ca86d4cd86f989dd35bc5ff499670da34255b45b0cfd830e81f605dcf7dc5542e93ae9cd76f')
   })
 })
