@@ -99,13 +99,42 @@
     <section>
         <article><h1>Operate | Agent (js)</h1>
 <p><strong>Operate | Agent (js)</strong> is a JavaScript agent used to load and run programs (known as &quot;tapes&quot;) encoded in Bitcoin SV transactions.</p>
-<p><strong>This repository contains pre-release code. Please wait for a package to be released before using this software.</strong></p>
+<p><strong>This repository contains alpha-release code. Some of the API is likely to evolve over time so avoid production use for now.</strong></p>
 <h2>About Operate</h2>
 <p>Operate is a toolset to help developers build applications, games and services on top of Bitcoin (SV). It lets you write functions, called &quot;Ops&quot;, and enables transactions to become small but powerful programs, capable of delivering new classes of services layered over Bitcoin.</p>
 <p>More infomation:</p>
 <ul>
 <li><a href="https://www.operatebsv.org">Project website</a></li>
 <li><a href="https://operate-bsv.github.io/op_agent-js">API documentation</a></li>
+</ul>
+<h2>Installation</h2>
+<p>Install using NPM:</p>
+<pre class="prettyprint source lang-console"><code>npm install @operate/agent
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>const Operate = require('@operate/agent')
+</code></pre>
+<p>Or use in the browser via CDN (adds <code>Operate</code> to the global namespace):</p>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;//unpkg.com/@operate/agent@latest/dist/operate.min.js&quot;>&lt;/script>
+</code></pre>
+<h2>Quick start</h2>
+<h3>Aliases</h3>
+<p>To kick the styles, set up some aliases for common Bitcom protocol prefixes. This will allow you to load and run tapes from common services such as Bitpaste, Twetch, WeatherSV, Bit.sv and more.</p>
+<pre class="prettyprint source lang-javascript"><code>Operate.config.quickStartAliases()
+</code></pre>
+<h3>Load and run a tape</h3>
+<p>Operate can be used straight away to load and run tapes from transactions.</p>
+<pre class="prettyprint source lang-javascript"><code>const tape = await Operate.loadTape(txid)
+const result = await Operate.runTape(tape)
+</code></pre>
+<p>Operate always returns table structures from the Lua environment as a JavaScript <code>Map</code>. If preferred, these can be converted to an <code>Object</code> for easier data traversal and access.</p>
+<pre class="prettyprint source lang-javascript"><code>Operate.util.mapToObject(result)
+</code></pre>
+<h2>Alpha software</h2>
+<p>This software should be considered alpha. There are a few known issues and things that may change over time:</p>
+<ul>
+<li>API changes. The current implmentation closely mirrors the design of the <a href="https://github.com/operate-bsv/op_agent">Elixir agent</a>. Elixir and JavaScript semantics are quite different so over time the API design may change to reflect more idiomatic JavaScript styles.</li>
+<li>Error handling sucks. If something goes wrong, especially in the Lua VM, the error you get back will almost certainly not be very useful. This will be improved over time.</li>
+<li>Bundle size. The minimised bundle currently weights in at over 700kb! I think it will be possible to get this under 300kb, but this will take work and time.</li>
 </ul>
 <h2>License</h2>
 <p><a href="https://github.com/operate-bsv/op_agent-js/blob/master/LICENSE.md">MIT License</a>.</p>
