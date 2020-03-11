@@ -1,6 +1,6 @@
 {
   "name": "@operate/agent",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Operate JavaScript agent used to load and run Bitcoin programs.",
   "main": "lib/index.js",
   "browser": "dist/operate.min.js",
