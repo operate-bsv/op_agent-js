@@ -1,25 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Interface: Cache</title>
+    <title>JSDoc: Cache</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
 </head>
 
 <body>
-
-<div id="main">
-
-    <h1 class="page-title">Interface: Cache</h1>
-
-    
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                     
+                        <h1 class="navbar-item">Operate | Agent (js)</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                 
+                <div class="navbar-menu">
+                    <div class="navbar-end">
+                    
+                        <div class="navbar-item">
+                            <a href="https://www.operatebsv.org" target="_blank">
+                                Homepage
+                            </a>
+                        </div>
+                    
+                        <div class="navbar-item">
+                            <a href="https://github.com/operate-bsv/op_agent-js" target="_blank">
+                                Github
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Agent.html">Agent</a></li><li><a href="Cell.html">Cell</a></li><li><a href="Operate.html">Operate</a></li><li><a href="Tape.html">Tape</a></li><li><a href="VM.html">VM</a></li></ul><h3>Interfaces</h3><ul><li><a href="Adapter.html">Adapter</a></li><li><a href="Cache.html">Cache</a></li><li><a href="Extension.html">Extension</a></li></ul><h3>Global</h3><ul><li><a href="global.html#config">config</a></li><li><a href="global.html#interop">interop</a></li><li><a href="global.html#util">util</a></li></ul></div><div class="category"><h2>Adapters</h2><h3>Classes</h3><ul><li><a href="BobAdapter.html">BobAdapter</a></li><li><a href="OpApiAdapter.html">OpApiAdapter</a></li></ul></div><div class="category"><h2>Caches</h2><h3>Classes</h3><ul><li><a href="NoCache.html">NoCache</a></li></ul></div><div class="category"><h2>Extensions</h2><h3>Classes</h3><ul><li><a href="AgentExtension.html">AgentExtension</a></li><li><a href="BaseExtension.html">BaseExtension</a></li><li><a href="ContextExtension.html">ContextExtension</a></li><li><a href="CryptoExtension.html">CryptoExtension</a></li><li><a href="JsonExtension.html">JsonExtension</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Interface</p>
+                        <h1>Cache</h1>
+                    </header>
+                    
+                    
 
 
 
@@ -30,6 +84,16 @@
     
         <h2>Cache</h2>
         
+            <div class="class-description"><p>A cache is responsible for storing and retrieving tapes and ops from a
+cache, and if necessary instructing an adapter to fetch items from a data
+source.</p>
+<p>A cache must implement all of the following callbacks:</p>
+<ul>
+<li><code>fetchTx()</code></li>
+<li><code>fetchTxBy()</code></li>
+<li><code>fetchOps()</code></li>
+</ul></div>
+        
     
 </header>
 
@@ -37,16 +101,6 @@
     <div class="container-overview">
     
         
-            <div class="description">A cache is responsible for storing and retrieving tapes and ops from a
-cache, and if necessary instructing an adapter to fetch items from a data
-source.
-
-A cache must implement all of the following callbacks:
-
-* `fetchTx()`
-* `fetchTxBy()`
-* `fetchOps()`</div>
-        
 
         
 
@@ -76,18 +130,19 @@ A cache must implement all of the following callbacks:
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="operate_cache.js.html">operate/cache.js</a>, <a href="operate_cache.js.html#line1">line 1</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="operate_cache.js.html" class="button">View Source</a>
+            <span>
+                <a href="operate_cache.js.html">operate/cache.js</a>, <a href="operate_cache.js.html#line15">line 15</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -95,7 +150,7 @@ A cache must implement all of the following callbacks:
         
     
     </div>
-
+    
     
 
     
@@ -111,25 +166,36 @@ A cache must implement all of the following callbacks:
     
 
     
-        <h3 class="subsection-title">Methods</h3>
+        <div class='vertical-section'>
+            <h3 class="title"><span>Methods</span></h3>
+            <div class="members">
+            
+                <div class="member">
 
+
+    
+    <h4 class="name" id=".fetchOps">
+        <a class="href-link" href="#.fetchOps">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                fetchOps<span class="signature">(refs, opts)</span><span class="type-signature"> &rarr; {Promise}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".fetchOps"><span class="type-signature">(static) </span>fetchOps<span class="signature">(refs, opts)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
     
-
+    <div class="description">
+        <p>Loads Ops from the cache by the given procedure referneces, or delegates
+the job to the specified adapter.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Loads Ops from the cache by the given procedure referneces, or delegates
-the job to the specified adapter.
-</div>
 
 
 
@@ -162,54 +228,57 @@ the job to the specified adapter.
     <tbody>
     
 
-        <tr>
-            
-                <td class="name"><code>refs</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>refs</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Array</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Op references</td>
-        </tr>
+  <td class="description last"><p>Op references</p></td>
+</tr>
+
 
     
 
-        <tr>
-            
-                <td class="name"><code>opts</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opts</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Options</td>
-        </tr>
+  <td class="description last"><p>Options</p></td>
+</tr>
+
 
     
     </tbody>
 </table>
-
 
 
 
@@ -240,18 +309,19 @@ the job to the specified adapter.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="operate_cache.js.html">operate/cache.js</a>, <a href="operate_cache.js.html#line51">line 51</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="operate_cache.js.html" class="button">View Source</a>
+            <span>
+                <a href="operate_cache.js.html">operate/cache.js</a>, <a href="operate_cache.js.html#line52">line 52</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -269,46 +339,63 @@ the job to the specified adapter.
 
 
 
-<h5>Returns:</h5>
-
-        
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
 <span class="param-type">Promise</span>
 
 
-    </dd>
-</dl>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id=".fetchTx">
+        <a class="href-link" href="#.fetchTx">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                fetchTx<span class="signature">(txid, opts)</span><span class="type-signature"> &rarr; {Promise}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".fetchTx"><span class="type-signature">(static) </span>fetchTx<span class="signature">(txid, opts)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
     
-
+    <div class="description">
+        <p>Loads a transaction from the cache by the given txid, or delegates to job
+to the specified adapter.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Loads a transaction from the cache by the given txid, or delegates to job
-to the specified adapter.
-</div>
 
 
 
@@ -341,54 +428,57 @@ to the specified adapter.
     <tbody>
     
 
-        <tr>
-            
-                <td class="name"><code>txid</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>txid</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">String</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Transaction id</td>
-        </tr>
+  <td class="description last"><p>Transaction id</p></td>
+</tr>
+
 
     
 
-        <tr>
-            
-                <td class="name"><code>opts</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opts</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Options</td>
-        </tr>
+  <td class="description last"><p>Options</p></td>
+</tr>
+
 
     
     </tbody>
 </table>
-
 
 
 
@@ -419,18 +509,19 @@ to the specified adapter.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="operate_cache.js.html">operate/cache.js</a>, <a href="operate_cache.js.html#line25">line 25</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="operate_cache.js.html" class="button">View Source</a>
+            <span>
+                <a href="operate_cache.js.html">operate/cache.js</a>, <a href="operate_cache.js.html#line26">line 26</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -448,46 +539,63 @@ to the specified adapter.
 
 
 
-<h5>Returns:</h5>
-
-        
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
 <span class="param-type">Promise</span>
 
 
-    </dd>
-</dl>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id=".fetchTxBy">
+        <a class="href-link" href="#.fetchTxBy">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                fetchTxBy<span class="signature">(query, opts)</span><span class="type-signature"> &rarr; {Promise}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".fetchTxBy"><span class="type-signature">(static) </span>fetchTxBy<span class="signature">(query, opts)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
     
-
+    <div class="description">
+        <p>Loads a list of transactions from the cache by the given query map, or
+delegates to job to the specified adapter.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Loads a list of transactions from the cache by the given query map, or
-delegates to job to the specified adapter.
-</div>
 
 
 
@@ -520,54 +628,57 @@ delegates to job to the specified adapter.
     <tbody>
     
 
-        <tr>
-            
-                <td class="name"><code>query</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>query</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Query object</td>
-        </tr>
+  <td class="description last"><p>Query object</p></td>
+</tr>
+
 
     
 
-        <tr>
-            
-                <td class="name"><code>opts</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opts</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Options</td>
-        </tr>
+  <td class="description last"><p>Options</p></td>
+</tr>
+
 
     
     </tbody>
 </table>
-
 
 
 
@@ -598,18 +709,19 @@ delegates to job to the specified adapter.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="operate_cache.js.html">operate/cache.js</a>, <a href="operate_cache.js.html#line38">line 38</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="operate_cache.js.html" class="button">View Source</a>
+            <span>
+                <a href="operate_cache.js.html">operate/cache.js</a>, <a href="operate_cache.js.html#line39">line 39</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -627,30 +739,39 @@ delegates to job to the specified adapter.
 
 
 
-<h5>Returns:</h5>
-
-        
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
 <span class="param-type">Promise</span>
 
 
-    </dd>
-</dl>
-
+    </div>
     
+</div>
+
+                
+        </div>
+    </div>
 
 
 
 
-
-        
+</div>
+            
+            </div>
+        </div>
     
 
     
@@ -663,19 +784,24 @@ delegates to job to the specified adapter.
 
 
 
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agent.html">Agent</a></li><li><a href="AgentExt.html">AgentExt</a></li><li><a href="BaseExt.html">BaseExt</a></li><li><a href="Bob.html">Bob</a></li><li><a href="Cell.html">Cell</a></li><li><a href="ContextExt.html">ContextExt</a></li><li><a href="CryptoExt.html">CryptoExt</a></li><li><a href="JsonExt.html">JsonExt</a></li><li><a href="JSProxy.html">JSProxy</a></li><li><a href="NoCache.html">NoCache</a></li><li><a href="OpApi.html">OpApi</a></li><li><a href="Operate.html">Operate</a></li><li><a href="Tape.html">Tape</a></li><li><a href="VM.html">VM</a></li></ul><h3>Interfaces</h3><ul><li><a href="Adapter.html">Adapter</a></li><li><a href="Cache.html">Cache</a></li><li><a href="Extension.html">Extension</a></li></ul><h3>Global</h3><ul><li><a href="global.html#interop">interop</a></li><li><a href="global.html#util">util</a></li></ul>
-</nav>
 
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sat Mar 07 2020 20:44:49 GMT+0000 (Greenwich Mean Time)
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a></p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
 </footer>
 
-<script> prettyPrint(); </script>
+
+<script src="scripts/app.min.js"></script>
 <script src="scripts/linenumber.js"> </script>
 </body>
 </html>

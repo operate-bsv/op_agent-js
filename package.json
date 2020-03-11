@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf dist && webpack --config ./webpack.config.js",
-    "docs": "jsdoc README.md lib/index.js lib/operate/ -r -d docs",
+    "docs": "rimraf docs && jsdoc -c ./jsdoc.config.js",
     "test": "mocha \"test/**/*.test.js\""
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "@babel/preset-env": "^7.8.6",
     "@babel/preset-es2017": "^7.0.0-beta.53",
     "babel-loader": "^8.0.6",
+    "better-docs": "^1.4.7",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "jsdoc": "^3.6.3",

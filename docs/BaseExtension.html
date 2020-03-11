@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: Adapter</title>
+    <title>JSDoc: BaseExtension</title>
 
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -69,8 +69,8 @@
             <div class="column is-9-desktop">
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
-                        <p>Interface</p>
-                        <h1>Adapter</h1>
+                        <p>Class</p>
+                        <h1>BaseExtension</h1>
                     </header>
                     
                     
@@ -82,18 +82,9 @@
 
 <header>
     
-        <h2>Adapter</h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>BaseExtension</h2>
         
-            <div class="class-description"><p>An adapter is responsible for loading tapes and ops from a datasource -
-potentially a web API, a database or even a Bitcoin node. Operate ships with
-two default adapters, although these can be swapped out with any other
-adpater by changing the configuration.</p>
-<p>An adapter must implement one or more of the following static methods:</p>
-<ul>
-<li><code>fetchTx()</code></li>
-<li><code>fetchTxBy()</code></li>
-<li><code>fetchOps()</code></li>
-</ul></div>
+            <div class="class-description"><p>Extends the VM state with functions for encoding and decoding hex and base64</p></div>
         
     
 </header>
@@ -102,8 +93,19 @@ adpater by changing the configuration.</p>
     <div class="container-overview">
     
         
+            
 
-        
+
+
+
+
+
+
+
+
+
+
+
 
 
 <dl class="details">
@@ -139,19 +141,50 @@ adpater by changing the configuration.</p>
 
     
         <p class="tag-source">
-            <a href="operate_adapter.js.html" class="button">View Source</a>
+            <a href="operate_vm_extension_base.js.html" class="button">View Source</a>
             <span>
-                <a href="operate_adapter.js.html">operate/adapter.js</a>, <a href="operate_adapter.js.html#line16">line 16</a>
+                <a href="operate_vm_extension_base.js.html">operate/vm/extension/base.js</a>, <a href="operate_vm_extension_base.js.html#line12">line 12</a>
             </span>
         </p>
     
 </dl>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
     
     </div>
     
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="Extension.html">Extension</a></li>
+    </ul>
+
+
     
 
     
@@ -175,8 +208,8 @@ adpater by changing the configuration.</p>
 
 
     
-    <h4 class="name" id=".fetchOps">
-        <a class="href-link" href="#.fetchOps">#</a>
+    <h4 class="name" id=".decode16">
+        <a class="href-link" href="#.decode16">#</a>
         
             
                 <span class='tag'>static</span>
@@ -184,7 +217,7 @@ adpater by changing the configuration.</p>
         
         <span class="code-name">
             
-                fetchOps<span class="signature">(refs, opts)</span><span class="type-signature"> &rarr; {Promise}</span>
+                decode16<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -193,7 +226,7 @@ adpater by changing the configuration.</p>
     
     
     <div class="description">
-        <p>Fetches a list of Ops by the given list of Op references, and returns a Promise.</p>
+        <p>Decodes the given hex string into a utf8 string.</p>
     </div>
     
 
@@ -204,81 +237,6 @@ adpater by changing the configuration.</p>
 
 
 
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>refs</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Array</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>Op references</p></td>
-</tr>
-
-
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>opts</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>Options</p></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
 
 
 
@@ -317,9 +275,9 @@ adpater by changing the configuration.</p>
 
     
         <p class="tag-source">
-            <a href="operate_adapter.js.html" class="button">View Source</a>
+            <a href="operate_vm_extension_base.js.html" class="button">View Source</a>
             <span>
-                <a href="operate_adapter.js.html">operate/adapter.js</a>, <a href="operate_adapter.js.html#line50">line 50</a>
+                <a href="operate_vm_extension_base.js.html">operate/vm/extension/base.js</a>, <a href="operate_vm_extension_base.js.html#line32">line 32</a>
             </span>
         </p>
     
@@ -341,29 +299,6 @@ adpater by changing the configuration.</p>
 
 
 
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Promise</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
 
 
 
@@ -374,8 +309,8 @@ adpater by changing the configuration.</p>
 
 
     
-    <h4 class="name" id=".fetchTx">
-        <a class="href-link" href="#.fetchTx">#</a>
+    <h4 class="name" id=".decode64">
+        <a class="href-link" href="#.decode64">#</a>
         
             
                 <span class='tag'>static</span>
@@ -383,7 +318,7 @@ adpater by changing the configuration.</p>
         
         <span class="code-name">
             
-                fetchTx<span class="signature">(txid, opts)</span><span class="type-signature"> &rarr; {Promise}</span>
+                decode64<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -392,7 +327,7 @@ adpater by changing the configuration.</p>
     
     
     <div class="description">
-        <p>Fetches a transaction by the given txid, and returns a Promise.</p>
+        <p>Decodes the given base64 string into a utf8 string.</p>
     </div>
     
 
@@ -403,81 +338,6 @@ adpater by changing the configuration.</p>
 
 
 
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>txid</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">String</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>Transaction id</p></td>
-</tr>
-
-
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>opts</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>Options</p></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
 
 
 
@@ -516,9 +376,9 @@ adpater by changing the configuration.</p>
 
     
         <p class="tag-source">
-            <a href="operate_adapter.js.html" class="button">View Source</a>
+            <a href="operate_vm_extension_base.js.html" class="button">View Source</a>
             <span>
-                <a href="operate_adapter.js.html">operate/adapter.js</a>, <a href="operate_adapter.js.html#line26">line 26</a>
+                <a href="operate_vm_extension_base.js.html">operate/vm/extension/base.js</a>, <a href="operate_vm_extension_base.js.html#line48">line 48</a>
             </span>
         </p>
     
@@ -540,29 +400,6 @@ adpater by changing the configuration.</p>
 
 
 
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Promise</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
 
 
 
@@ -573,8 +410,8 @@ adpater by changing the configuration.</p>
 
 
     
-    <h4 class="name" id=".fetchTxBy">
-        <a class="href-link" href="#.fetchTxBy">#</a>
+    <h4 class="name" id=".encode16">
+        <a class="href-link" href="#.encode16">#</a>
         
             
                 <span class='tag'>static</span>
@@ -582,7 +419,7 @@ adpater by changing the configuration.</p>
         
         <span class="code-name">
             
-                fetchTxBy<span class="signature">(query, opts)</span><span class="type-signature"> &rarr; {Promise}</span>
+                encode16<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -591,7 +428,7 @@ adpater by changing the configuration.</p>
     
     
     <div class="description">
-        <p>Fetches a list of transactions by the given query object, and returns a Promise.</p>
+        <p>Encodes the given string into a hex string.</p>
     </div>
     
 
@@ -602,81 +439,6 @@ adpater by changing the configuration.</p>
 
 
 
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>query</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>Query object</p></td>
-</tr>
-
-
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>opts</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>Options</p></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
 
 
 
@@ -715,9 +477,9 @@ adpater by changing the configuration.</p>
 
     
         <p class="tag-source">
-            <a href="operate_adapter.js.html" class="button">View Source</a>
+            <a href="operate_vm_extension_base.js.html" class="button">View Source</a>
             <span>
-                <a href="operate_adapter.js.html">operate/adapter.js</a>, <a href="operate_adapter.js.html#line38">line 38</a>
+                <a href="operate_vm_extension_base.js.html">operate/vm/extension/base.js</a>, <a href="operate_vm_extension_base.js.html#line24">line 24</a>
             </span>
         </p>
     
@@ -740,28 +502,106 @@ adpater by changing the configuration.</p>
 
 
 
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Promise</span>
 
 
-    </div>
-    
+
 </div>
+            
+                <div class="member">
 
-                
-        </div>
+
+    
+    <h4 class="name" id=".encode64">
+        <a class="href-link" href="#.encode64">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                encode64<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Encodes the given string into a base64 string.</p>
     </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="operate_vm_extension_base.js.html" class="button">View Source</a>
+            <span>
+                <a href="operate_vm_extension_base.js.html">operate/vm/extension/base.js</a>, <a href="operate_vm_extension_base.js.html#line40">line 40</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

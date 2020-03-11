@@ -1,11 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: operate/adapter/op_api.js</title>
+    <title>JSDoc: OpApiAdapter</title>
 
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -71,70 +69,350 @@
             <div class="column is-9-desktop">
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
-                        <p>Source</p>
-                        <h1>operate/adapter/op_api.js</h1>
+                        <p>Class</p>
+                        <h1>OpApiAdapter</h1>
                     </header>
                     
                     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const { URL, URLSearchParams } = require('url')
-const fetch = require('node-fetch')
-const Adapter = require('./../adapter')
+        <h2><span class="attribs"><span class="type-signature"></span></span>OpApiAdapter</h2>
+        
+            <div class="class-description"><p>Adapter module for loading Ops from the <a href="http://api.operatebsv.org">Operate API</a>.</p></div>
+        
+    
+</header>
 
-const baseUrl = 'https://api.operatebsv.org'
-
-
-/**
- * Adapter module for loading Ops from the [Operate API](http://api.operatebsv.org).
- *
- * @class
- * @extends Adapter
- * @category Adapters
- * @hideconstructor
- */
-class OpApiAdapter extends Adapter {
-
-  /**
-   * Fetches a list of Ops by the given list of Op references, and returns a Promise.
-   *
-   * @static
-   * @param {Array} refs Op references
-   * @param {Object} opts Options
-   * @return {Promise}
-   */
-  static fetchOps(refs, opts = {}) {
-    const url = new URL(baseUrl + '/ops')
-    url.search = new URLSearchParams({ refs, fn: true }).toString()
-
-    return fetch(url)
-      .then(r => r.json())
-      .then(data => data.data.map(this._toOp))
-  }
+<article>
+    <div class="container-overview">
+    
+        
+            
 
 
-  /**
-   * Normalise response in standard Op format
-   * @private
-   */
-  static _toOp(r) {
-    return {
-      ref: r.ref,
-      hash: r.hash,
-      name: r.name,
-      fn: r.fn,
-    }
-  }
 
-}
 
-module.exports = OpApiAdapter</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="operate_adapter_op_api.js.html" class="button">View Source</a>
+            <span>
+                <a href="operate_adapter_op_api.js.html">operate/adapter/op_api.js</a>, <a href="operate_adapter_op_api.js.html#line16">line 16</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="Adapter.html">Adapter</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h3 class="title"><span>Methods</span></h3>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".fetchOps">
+        <a class="href-link" href="#.fetchOps">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                fetchOps<span class="signature">(refs, opts)</span><span class="type-signature"> &rarr; {Promise}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Fetches a list of Ops by the given list of Op references, and returns a Promise.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>refs</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Array</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Op references</p></td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opts</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Options</p></td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="operate_adapter_op_api.js.html" class="button">View Source</a>
+            <span>
+                <a href="operate_adapter_op_api.js.html">operate/adapter/op_api.js</a>, <a href="operate_adapter_op_api.js.html#line26">line 26</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Promise</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

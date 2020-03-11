@@ -1,25 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Class: Operate</title>
+    <title>JSDoc: Operate</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
 </head>
 
 <body>
-
-<div id="main">
-
-    <h1 class="page-title">Class: Operate</h1>
-
-    
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                     
+                        <h1 class="navbar-item">Operate | Agent (js)</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                 
+                <div class="navbar-menu">
+                    <div class="navbar-end">
+                    
+                        <div class="navbar-item">
+                            <a href="https://www.operatebsv.org" target="_blank">
+                                Homepage
+                            </a>
+                        </div>
+                    
+                        <div class="navbar-item">
+                            <a href="https://github.com/operate-bsv/op_agent-js" target="_blank">
+                                Github
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Agent.html">Agent</a></li><li><a href="Cell.html">Cell</a></li><li><a href="Operate.html">Operate</a></li><li><a href="Tape.html">Tape</a></li><li><a href="VM.html">VM</a></li></ul><h3>Interfaces</h3><ul><li><a href="Adapter.html">Adapter</a></li><li><a href="Cache.html">Cache</a></li><li><a href="Extension.html">Extension</a></li></ul><h3>Global</h3><ul><li><a href="global.html#config">config</a></li><li><a href="global.html#interop">interop</a></li><li><a href="global.html#util">util</a></li></ul></div><div class="category"><h2>Adapters</h2><h3>Classes</h3><ul><li><a href="BobAdapter.html">BobAdapter</a></li><li><a href="OpApiAdapter.html">OpApiAdapter</a></li></ul></div><div class="category"><h2>Caches</h2><h3>Classes</h3><ul><li><a href="NoCache.html">NoCache</a></li></ul></div><div class="category"><h2>Extensions</h2><h3>Classes</h3><ul><li><a href="AgentExtension.html">AgentExtension</a></li><li><a href="BaseExtension.html">BaseExtension</a></li><li><a href="ContextExtension.html">ContextExtension</a></li><li><a href="CryptoExtension.html">CryptoExtension</a></li><li><a href="JsonExtension.html">JsonExtension</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Class</p>
+                        <h1>Operate</h1>
+                    </header>
+                    
+                    
 
 
 
@@ -28,7 +82,14 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Operate<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Operate</h2>
+        
+            <div class="class-description"><p>Load and run Operate programs (known as &quot;tapes&quot;) encoded in Bitcoin SV
+transactions.</p>
+<p>Operate is a toolset to help developers build applications, games and
+services on top of Bitcoin (SV). It lets you write functions, called &quot;Ops&quot;,
+and enables transactions to become small but powerful programs, capable of
+delivering new classes of services layered over Bitcoin.</p></div>
         
     
 </header>
@@ -37,26 +98,8 @@
     <div class="container-overview">
     
         
+            
 
-    
-
-    
-    <h4 class="name" id="Operate"><span class="type-signature"></span>new Operate<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Load and run Operate programs (known as "tapes") encoded in Bitcoin SV
-transactions.
-
-Operate is a toolset to help developers build applications, games and
-services on top of Bitcoin (SV). It lets you write functions, called "Ops",
-and enables transactions to become small but powerful programs, capable of
-delivering new classes of services layered over Bitcoin.
-</div>
 
 
 
@@ -95,18 +138,19 @@ delivering new classes of services layered over Bitcoin.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line5">line 5</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="index.js.html" class="button">View Source</a>
+            <span>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line17">line 17</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -129,9 +173,12 @@ delivering new classes of services layered over Bitcoin.
 
 
 
+
+
+        
     
     </div>
-
+    
     
 
     
@@ -145,20 +192,31 @@ delivering new classes of services layered over Bitcoin.
     
 
     
-        <h3 class="subsection-title">Members</h3>
-
-        
+        <div class='vertical-section'>
+            <h3 class="title"><span>Members</span></h3>
+            <div class="members">
             
-<h4 class="name" id=".Agent"><span class="type-signature">(static) </span>Agent<span class="type-signature"></span></h4>
+                <div class="member">
+
+<h4 class="name" id=".Agent">
+    <a class="href-link" href="#.Agent">#</a>
+    
+        
+            <span class='tag'>static</span>
+        
+    
+    <span class="code-name">
+        Agent
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    Returns the Agent class.
+    <p>Returns the Agent class.</p>
 </div>
-
-
 
 
 
@@ -189,18 +247,19 @@ delivering new classes of services layered over Bitcoin.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line66">line 66</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="index.js.html" class="button">View Source</a>
+            <span>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line67">line 67</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -208,19 +267,29 @@ delivering new classes of services layered over Bitcoin.
 
 
 
-
-        
+</div>
             
-<h4 class="name" id=".config"><span class="type-signature">(static) </span>config<span class="type-signature"></span></h4>
+                <div class="member">
+
+<h4 class="name" id=".config">
+    <a class="href-link" href="#.config">#</a>
+    
+        
+            <span class='tag'>static</span>
+        
+    
+    <span class="code-name">
+        config
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    Returns the config.
+    <p>Returns the config.</p>
 </div>
-
-
 
 
 
@@ -251,18 +320,19 @@ delivering new classes of services layered over Bitcoin.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line72">line 72</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="index.js.html" class="button">View Source</a>
+            <span>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line73">line 73</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -270,19 +340,29 @@ delivering new classes of services layered over Bitcoin.
 
 
 
-
-        
+</div>
             
-<h4 class="name" id=".util"><span class="type-signature">(static) </span>util<span class="type-signature"></span></h4>
+                <div class="member">
+
+<h4 class="name" id=".util">
+    <a class="href-link" href="#.util">#</a>
+    
+        
+            <span class='tag'>static</span>
+        
+    
+    <span class="code-name">
+        util
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    Returns the util helper module.
+    <p>Returns the util helper module.</p>
 </div>
-
-
 
 
 
@@ -313,18 +393,19 @@ delivering new classes of services layered over Bitcoin.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line78">line 78</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="index.js.html" class="button">View Source</a>
+            <span>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line79">line 79</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -332,34 +413,45 @@ delivering new classes of services layered over Bitcoin.
 
 
 
-
-        
+</div>
+            
+            </div>
+        </div>
     
 
     
-        <h3 class="subsection-title">Methods</h3>
+        <div class='vertical-section'>
+            <h3 class="title"><span>Methods</span></h3>
+            <div class="members">
+            
+                <div class="member">
 
+
+    
+    <h4 class="name" id=".loadTape">
+        <a class="href-link" href="#.loadTape">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                loadTape<span class="signature">(txid, opts)</span><span class="type-signature"> &rarr; {Promise(Tape)}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".loadTape"><span class="type-signature">(static) </span>loadTape<span class="signature">(txid, opts)</span><span class="type-signature"> &rarr; {Promise(Tape)}</span></h4>
     
-
+    <div class="description">
+        <p>Loads a tape from the given txid.</p>
+<p>Fetches the tape transaction output as well as all of the required
+functions, and returns a Promise.</p>
+<p>Any configuration option can be overridden.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Loads a tape from the given txid.
-
-Fetches the tape transaction output as well as all of the required
-functions, and returns a Promise.
-
-Any configuration option can be overridden.
-</div>
 
 
 
@@ -392,54 +484,57 @@ Any configuration option can be overridden.
     <tbody>
     
 
-        <tr>
-            
-                <td class="name"><code>txid</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>txid</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">String</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Transaction id</td>
-        </tr>
+  <td class="description last"><p>Transaction id</p></td>
+</tr>
+
 
     
 
-        <tr>
-            
-                <td class="name"><code>opts</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opts</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Options</td>
-        </tr>
+  <td class="description last"><p>Options</p></td>
+</tr>
+
 
     
     </tbody>
 </table>
-
 
 
 
@@ -470,18 +565,19 @@ Any configuration option can be overridden.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line29">line 29</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="index.js.html" class="button">View Source</a>
+            <span>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line30">line 30</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -499,51 +595,66 @@ Any configuration option can be overridden.
 
 
 
-<h5>Returns:</h5>
-
-        
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
 <span class="param-type">Promise(Tape)</span>
 
 
-    </dd>
-</dl>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id=".loadTapesBy">
+        <a class="href-link" href="#.loadTapesBy">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                loadTapesBy<span class="signature">(query, opts)</span><span class="type-signature"> &rarr; {Promise(Array)}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".loadTapesBy"><span class="type-signature">(static) </span>loadTapesBy<span class="signature">(query, opts)</span><span class="type-signature"> &rarr; {Promise(Array)}</span></h4>
     
-
-    
-
-
-
-<div class="description">
-    Loads a tape from the given query.
-
-The expected format of the query will depend on the Adapter in use.
+    <div class="description">
+        <p>Loads a tape from the given query.</p>
+<p>The expected format of the query will depend on the Adapter in use.
 The transactions as well as all required functions are loaded and a Proise
-is returned resolving in a list of Tapes.
-
-Any configuration option can be overridden.
-</div>
+is returned resolving in a list of Tapes.</p>
+<p>Any configuration option can be overridden.</p>
+    </div>
+    
 
 
 
@@ -576,54 +687,57 @@ Any configuration option can be overridden.
     <tbody>
     
 
-        <tr>
-            
-                <td class="name"><code>query</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>query</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Query object</td>
-        </tr>
+  <td class="description last"><p>Query object</p></td>
+</tr>
+
 
     
 
-        <tr>
-            
-                <td class="name"><code>opts</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opts</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Options</td>
-        </tr>
+  <td class="description last"><p>Options</p></td>
+</tr>
+
 
     
     </tbody>
 </table>
-
 
 
 
@@ -654,18 +768,19 @@ Any configuration option can be overridden.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line46">line 46</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="index.js.html" class="button">View Source</a>
+            <span>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line47">line 47</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -683,45 +798,62 @@ Any configuration option can be overridden.
 
 
 
-<h5>Returns:</h5>
-
-        
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
 <span class="param-type">Promise(Array)</span>
 
 
-    </dd>
-</dl>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id=".runTape">
+        <a class="href-link" href="#.runTape">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                runTape<span class="signature">(tape, opts)</span><span class="type-signature"> &rarr; {Promise(any)}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".runTape"><span class="type-signature">(static) </span>runTape<span class="signature">(tape, opts)</span><span class="type-signature"> &rarr; {Promise(any)}</span></h4>
     
-
+    <div class="description">
+        <p>Runs the given tape executing each of the tape's cells and returns Tape.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Runs the given tape executing each of the tape's cells and returns Tape.
-</div>
 
 
 
@@ -754,54 +886,57 @@ Any configuration option can be overridden.
     <tbody>
     
 
-        <tr>
-            
-                <td class="name"><code>tape</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>tape</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type"><a href="Tape.html">Tape</a></span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Tape instance</td>
-        </tr>
+  <td class="description last"><p>Tape instance</p></td>
+</tr>
+
 
     
 
-        <tr>
-            
-                <td class="name"><code>opts</code></td>
-            
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opts</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Options</td>
-        </tr>
+  <td class="description last"><p>Options</p></td>
+</tr>
+
 
     
     </tbody>
 </table>
-
 
 
 
@@ -832,18 +967,19 @@ Any configuration option can be overridden.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line57">line 57</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="index.js.html" class="button">View Source</a>
+            <span>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line58">line 58</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -861,30 +997,39 @@ Any configuration option can be overridden.
 
 
 
-<h5>Returns:</h5>
-
-        
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
 <span class="param-type">Promise(any)</span>
 
 
-    </dd>
-</dl>
-
+    </div>
     
+</div>
+
+                
+        </div>
+    </div>
 
 
 
 
-
-        
+</div>
+            
+            </div>
+        </div>
     
 
     
@@ -897,19 +1042,24 @@ Any configuration option can be overridden.
 
 
 
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Agent.html">Agent</a></li><li><a href="AgentExt.html">AgentExt</a></li><li><a href="BaseExt.html">BaseExt</a></li><li><a href="Bob.html">Bob</a></li><li><a href="Cell.html">Cell</a></li><li><a href="ContextExt.html">ContextExt</a></li><li><a href="CryptoExt.html">CryptoExt</a></li><li><a href="JsonExt.html">JsonExt</a></li><li><a href="JSProxy.html">JSProxy</a></li><li><a href="NoCache.html">NoCache</a></li><li><a href="OpApi.html">OpApi</a></li><li><a href="Operate.html">Operate</a></li><li><a href="Tape.html">Tape</a></li><li><a href="VM.html">VM</a></li></ul><h3>Interfaces</h3><ul><li><a href="Adapter.html">Adapter</a></li><li><a href="Cache.html">Cache</a></li><li><a href="Extension.html">Extension</a></li></ul><h3>Global</h3><ul><li><a href="global.html#interop">interop</a></li><li><a href="global.html#util">util</a></li></ul>
-</nav>
 
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sat Mar 07 2020 20:44:49 GMT+0000 (Greenwich Mean Time)
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a></p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
 </footer>
 
-<script> prettyPrint(); </script>
+
+<script src="scripts/app.min.js"></script>
 <script src="scripts/linenumber.js"> </script>
 </body>
 </html>
