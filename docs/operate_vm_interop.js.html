@@ -198,8 +198,9 @@ const interop = {
     const type = lua.lua_type(vm, i)
     switch(type) {
       case lua.LUA_TNONE:                 // -1
-      case lua.LUA_TNIL:                  // 0
         return void 0;
+      case lua.LUA_TNIL:                  // 0
+        return null;
       case lua.LUA_TBOOLEAN:              // 1
         return lua.lua_toboolean(vm, i)
       case lua.LUA_TLIGHTUSERDATA:        // 2
@@ -300,6 +301,7 @@ function JSProxy(val) {
  */
 function LuaProxy(vm, proxy) {
   const fn = (...args) => invokeAsync(vm, proxy, args)
+  Object.setPrototypeOf(fn, LuaProxy.prototype)
   fn.invoke = (...args) => invoke(vm, proxy, args)
   fn.invokeAsync = (...args) => invokeAsync(vm, proxy, args)
   fn.proxy = proxy

@@ -1,5 +1,5 @@
 /*!
- * Operate / Agent - v0.1.0-alpha.1
+ * Operate / Agent - v0.1.0-alpha.3
  * Operate JavaScript agent used to load and run Bitcoin programs.
  * github.com:operate-bsv/op_agent-js
  * Copyright © 2020 Chronos Labs Ltd. MIT License.
@@ -11261,7 +11261,7 @@ module.exports = hash;
 const {
   instantiateRipemd160,
   instantiateSecp256k1
-} = __webpack_require__(89);
+} = __webpack_require__(90);
 /**
  * TODO
  */
@@ -21598,11 +21598,13 @@ const interop = {
     const type = lua.lua_type(vm, i);
 
     switch (type) {
-      case lua.LUA_TNONE: // -1
+      case lua.LUA_TNONE:
+        // -1
+        return void 0;
 
       case lua.LUA_TNIL:
         // 0
-        return void 0;
+        return null;
 
       case lua.LUA_TBOOLEAN:
         // 1
@@ -21721,6 +21723,8 @@ function JSProxy(val) {
 
 function LuaProxy(vm, proxy) {
   const fn = (...args) => invokeAsync(vm, proxy, args);
+
+  Object.setPrototypeOf(fn, LuaProxy.prototype);
 
   fn.invoke = (...args) => invoke(vm, proxy, args);
 
@@ -22025,6 +22029,8 @@ const Agent = __webpack_require__(50);
 const config = __webpack_require__(46);
 
 const util = __webpack_require__(24);
+
+const pkg = __webpack_require__(89);
 /**
  * Load and run Operate programs (known as "tapes") encoded in Bitcoin SV
  * transactions.
@@ -22106,6 +22112,12 @@ Operate.config = config;
  */
 
 Operate.util = util;
+/**
+ * Returns version number.
+ * @static
+ */
+
+Operate.version = pkg.version;
 module.exports = Operate;
 
 /***/ }),
@@ -29144,6 +29156,12 @@ module.exports = Cache;
 
 /***/ }),
 /* 89 */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"name\":\"@operate/agent\",\"version\":\"0.1.0-alpha.3\",\"description\":\"Operate JavaScript agent used to load and run Bitcoin programs.\",\"main\":\"lib/index.js\",\"browser\":\"dist/operate.min.js\",\"homepage\":\"https://www.operatebsv.org\",\"repository\":\"github.com:operate-bsv/op_agent-js\",\"author\":\"Chronos Labs Ltd\",\"license\":\"MIT\",\"scripts\":{\"build\":\"rimraf dist && webpack --config ./webpack.config.js\",\"docs\":\"rimraf docs && jsdoc -c ./jsdoc.config.js\",\"test\":\"mocha \\\"test/**/*.test.js\\\"\"},\"dependencies\":{\"bitcoin-ts\":\"^1.12.0\",\"bops\":\"^1.0.0\",\"fengari\":\"^0.1.4\",\"isomorphic-webcrypto\":\"^2.3.5\",\"isutf8\":\"^2.1.0\",\"node-fetch\":\"^2.6.0\"},\"devDependencies\":{\"@babel/core\":\"^7.8.6\",\"@babel/plugin-proposal-nullish-coalescing-operator\":\"^7.8.3\",\"@babel/plugin-proposal-optional-chaining\":\"^7.8.3\",\"@babel/preset-env\":\"^7.8.6\",\"@babel/preset-es2017\":\"^7.0.0-beta.53\",\"babel-loader\":\"^8.0.6\",\"better-docs\":\"^1.4.7\",\"chai\":\"^4.2.0\",\"chai-as-promised\":\"^7.1.1\",\"jsdoc\":\"^3.6.3\",\"mocha\":\"^7.0.0\",\"nock\":\"^11.7.1\",\"rimraf\":\"^3.0.2\",\"terser-webpack-plugin\":\"^2.3.5\",\"webpack\":\"^4.42.0\",\"webpack-cli\":\"^3.3.11\"}}");
+
+/***/ }),
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
