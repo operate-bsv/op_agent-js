@@ -3,7 +3,7 @@
   "version": "0.1.0-alpha.1",
   "description": "Operate JavaScript agent used to load and run Bitcoin programs.",
   "main": "lib/index.js",
-  "browser": "dist.operate.min.js",
+  "browser": "dist/operate.min.js",
   "homepage": "https://www.operatebsv.org",
   "repository": "github.com:operate-bsv/op_agent-js",
   "author": "Chronos Labs Ltd",

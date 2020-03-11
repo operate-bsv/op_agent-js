@@ -1,8 +1,5 @@
 .DS_Store
 
-# Dist folder
-dist/
-
 # Dependency directories
 node_modules/
 
