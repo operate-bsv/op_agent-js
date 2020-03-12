@@ -26,12 +26,12 @@ describe('ContextExt.txInput', () => {
 
   it('out of range must return nil', () => {
     const res = vm.eval('return ctx.tx_input(1000)')
-    assert.isUndefined(res)
+    assert.isNull(res)
   })
 
   it('out of state must return nil', () => {
     const res = vm2.eval('return ctx.tx_input(1)')
-    assert.isUndefined(res)
+    assert.isNull(res)
   })
 })
 
@@ -45,12 +45,12 @@ describe('ContextExt.txOutput', () => {
 
   it('out of range must return nil', () => {
     const res = vm.eval('return ctx.tx_output(1000)')
-    assert.isUndefined(res)
+    assert.isNull(res)
   })
 
   it('without state must return nil', () => {
     const res = vm2.eval('return ctx.tx_output(1)')
-    assert.isUndefined(res)
+    assert.isNull(res)
   })
 })
 
@@ -63,7 +63,7 @@ describe('ContextExt.getTape', () => {
 
   it('without state must return nil', () => {
     const res = vm2.eval('return ctx.get_tape()')
-    assert.isUndefined(res)
+    assert.isNull(res)
   })
 })
 
@@ -83,6 +83,6 @@ describe('ContextExt.getCell', () => {
 
   it('without state must return nil', () => {
     const res = vm2.eval('return ctx.get_cell()')
-    assert.isUndefined(res)
+    assert.isNull(res)
   })
 })

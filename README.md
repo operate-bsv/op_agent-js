@@ -62,7 +62,7 @@ This software should be considered alpha. There are a few known issues and thing
 
 * API changes. The current implmentation closely mirrors the design of the [Elixir agent](https://github.com/operate-bsv/op_agent). Elixir and JavaScript semantics are quite different so over time the API design may change to reflect more idiomatic JavaScript styles.
 * Error handling sucks. If something goes wrong, especially in the Lua VM, the error you get back will almost certainly not be very useful. This will be improved over time.
-* Bundle size. The minimised bundle currently weights in at over 700kb! I think it will be possible to get this under 300kb, but this will take work and time.
+* Bundle size. The minimised bundle currently weighs in at over 700kb! I think it will be possible to get this under 300kb, but this will take work and time.
 
 
 ## License
