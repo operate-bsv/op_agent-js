@@ -1461,10 +1461,9 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
   integrity sha512-ItfYfPLkWHUjckQCk8xC+LwxgK8NYcXywGigJgSwOP8Y2iyWT4f2vsZnoOXTTbo+o5yXmIUJ4gn5538SO5S3gA==
 
-bops@^1.0.0:
+bops@libitx/bops:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/bops/-/bops-1.0.0.tgz#631a8928f1178417eb6f706cf69acdb5e5a4eaad"
-  integrity sha1-YxqJKPEXhBfrb3Bs9prNteWk6q0=
+  resolved "https://codeload.github.com/libitx/bops/tar.gz/83b81103e90c966b76e2f54e9d6cc12f9a66d175"
   dependencies:
     base64-js "1.0.2"
     to-utf8 "0.0.1"

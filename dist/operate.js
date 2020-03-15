@@ -1,5 +1,5 @@
 /*!
- * Operate / Agent - v0.1.0-alpha.5
+ * Operate / Agent - v0.1.0-alpha.6
  * Operate JavaScript agent used to load and run Bitcoin programs.
  * github.com:operate-bsv/op_agent-js
  * Copyright © 2020 Chronos Labs Ltd. MIT License.
@@ -22585,7 +22585,9 @@ var decoders = {
 };
 
 function from(source, encoding) {
-  if (Array.isArray(source)) {
+  if (source instanceof Uint8Array) {
+    return source;
+  } else if (Array.isArray(source) || source instanceof ArrayBuffer) {
     return new Uint8Array(source);
   }
 
@@ -29158,7 +29160,7 @@ module.exports = Cache;
 /* 89 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"@operate/agent\",\"version\":\"0.1.0-alpha.5\",\"description\":\"Operate JavaScript agent used to load and run Bitcoin programs.\",\"main\":\"lib/index.js\",\"browser\":\"dist/operate.min.js\",\"homepage\":\"https://www.operatebsv.org\",\"repository\":\"github.com:operate-bsv/op_agent-js\",\"author\":\"Chronos Labs Ltd\",\"license\":\"MIT\",\"scripts\":{\"build\":\"rimraf dist && webpack --config ./webpack.config.js\",\"docs\":\"rimraf docs && jsdoc -c ./jsdoc.config.js\",\"test\":\"mocha \\\"test/**/*.test.js\\\"\"},\"dependencies\":{\"bitcoin-ts\":\"^1.12.0\",\"bops\":\"^1.0.0\",\"fengari\":\"^0.1.4\",\"isomorphic-webcrypto\":\"^2.3.5\",\"isutf8\":\"^2.1.0\",\"node-fetch\":\"^2.6.0\"},\"devDependencies\":{\"@babel/core\":\"^7.8.6\",\"@babel/plugin-proposal-nullish-coalescing-operator\":\"^7.8.3\",\"@babel/plugin-proposal-optional-chaining\":\"^7.8.3\",\"@babel/preset-env\":\"^7.8.6\",\"@babel/preset-es2017\":\"^7.0.0-beta.53\",\"babel-loader\":\"^8.0.6\",\"better-docs\":\"^1.4.7\",\"chai\":\"^4.2.0\",\"chai-as-promised\":\"^7.1.1\",\"jsdoc\":\"^3.6.3\",\"mocha\":\"^7.0.0\",\"nock\":\"^11.7.1\",\"rimraf\":\"^3.0.2\",\"terser-webpack-plugin\":\"^2.3.5\",\"webpack\":\"^4.42.0\",\"webpack-cli\":\"^3.3.11\"}}");
+module.exports = JSON.parse("{\"name\":\"@operate/agent\",\"version\":\"0.1.0-alpha.6\",\"description\":\"Operate JavaScript agent used to load and run Bitcoin programs.\",\"main\":\"lib/index.js\",\"browser\":\"dist/operate.min.js\",\"homepage\":\"https://www.operatebsv.org\",\"repository\":\"github.com:operate-bsv/op_agent-js\",\"author\":\"Chronos Labs Ltd\",\"license\":\"MIT\",\"scripts\":{\"build\":\"rimraf dist && webpack --config ./webpack.config.js\",\"docs\":\"rimraf docs && jsdoc -c ./jsdoc.config.js\",\"test\":\"mocha \\\"test/**/*.test.js\\\"\"},\"dependencies\":{\"bitcoin-ts\":\"^1.12.0\",\"bops\":\"libitx/bops\",\"fengari\":\"^0.1.4\",\"isomorphic-webcrypto\":\"^2.3.5\",\"isutf8\":\"^2.1.0\",\"node-fetch\":\"^2.6.0\"},\"devDependencies\":{\"@babel/core\":\"^7.8.6\",\"@babel/plugin-proposal-nullish-coalescing-operator\":\"^7.8.3\",\"@babel/plugin-proposal-optional-chaining\":\"^7.8.3\",\"@babel/preset-env\":\"^7.8.6\",\"@babel/preset-es2017\":\"^7.0.0-beta.53\",\"babel-loader\":\"^8.0.6\",\"better-docs\":\"^1.4.7\",\"chai\":\"^4.2.0\",\"chai-as-promised\":\"^7.1.1\",\"jsdoc\":\"^3.6.3\",\"mocha\":\"^7.0.0\",\"nock\":\"^11.7.1\",\"rimraf\":\"^3.0.2\",\"terser-webpack-plugin\":\"^2.3.5\",\"webpack\":\"^4.42.0\",\"webpack-cli\":\"^3.3.11\"}}");
 
 /***/ }),
 /* 90 */
