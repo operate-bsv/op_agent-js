@@ -2,8 +2,6 @@
 
 **Operate | Agent (js)** is a JavaScript agent used to load and run programs (known as "tapes") encoded in Bitcoin SV transactions.
 
-**This repository contains alpha-release code. Some of the API is likely to evolve over time so avoid production use for now.**
-
 ## About Operate
 
 Operate is a toolset to help developers build applications, games and services on top of Bitcoin (SV). It lets you write functions, called "Ops", and enables transactions to become small but powerful programs, capable of delivering new classes of services layered over Bitcoin.
@@ -56,9 +54,9 @@ Operate always returns table structures from the Lua environment as a JavaScript
 Operate.util.mapToObject(result)
 ```
 
-## Alpha software
+## Beta software
 
-This software should be considered alpha. There are a few known issues and things that may change over time:
+This software should be considered beta. There are a few known issues and things that may change over time:
 
 * API changes. The current implmentation closely mirrors the design of the [Elixir agent](https://github.com/operate-bsv/op_agent). Elixir and JavaScript semantics are quite different so over time the API design may change to reflect more idiomatic JavaScript styles.
 * Error handling sucks. If something goes wrong, especially in the Lua VM, the error you get back will almost certainly not be very useful. This will be improved over time.
