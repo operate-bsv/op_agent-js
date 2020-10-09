@@ -2,6 +2,7 @@ const { resolve } = require('path')
 const { assert } = require('chai')
 const nock = require('nock')
 const VM = require(resolve('lib/operate/vm'))
+const Bob = require(resolve('lib/operate/adapter/bob'))
 const Agent = require(resolve('lib/operate/agent'))
 const Cell = require(resolve('lib/operate/cell'))
 const util = require(resolve('lib/operate/util'))
@@ -13,7 +14,10 @@ before(() => {
     '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5': '1fec30d4',
     '15PciHG22SNLQJXMoSUaWVi7WSqc7hCfva': 'a3a83843'
   }
-  agent = new Agent({ aliases })
+  agent = new Agent({
+    tape_adapter: Bob,
+    aliases 
+  })
   vm = new VM({ agent })
 })
 

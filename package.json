@@ -14,6 +14,7 @@
     "test": "mocha \"test/**/*.test.js\""
   },
   "dependencies": {
+    "@libitx/shapeshifter.js": "^0.1.0",
     "bitcoin-ts": "^1.12.0",
     "bops": "libitx/bops",
     "fengari": "^0.1.4",
@@ -29,6 +30,7 @@
     "@babel/preset-es2017": "^7.0.0-beta.53",
     "babel-loader": "^8.0.6",
     "better-docs": "^1.4.7",
+    "bsv": "^2.0.0-beta",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "jsdoc": "^3.6.3",
