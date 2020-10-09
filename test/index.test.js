@@ -4,7 +4,6 @@ const nock = require('nock')
 const Operate = require(resolve('lib/index'))
 const Agent = require(resolve('lib/operate/agent'))
 const Tape = require(resolve('lib/operate/tape'))
-const Cell = require(resolve('lib/operate/cell'))
 const Bob = require(resolve('lib/operate/adapter/bob'))
 const util = require(resolve('lib/operate/util'))
 
@@ -22,10 +21,10 @@ before(() => {
 
 describe('Operate.loadTape()', () => {
   before(() => {
-    nock('https://api.mattercloud.net/')
+    nock('https://media.bitcoinfiles.org/')
       .get(/.*/)
       .twice()
-      .replyWithFile(200, 'test/mocks/matterpool_fetch_tx.json', {
+      .replyWithFile(200, 'test/mocks/bitcoin_files_fetch_tx.txt', {
         'Content-Type': 'application/json'
       })
     nock('https://api.operatebsv.org/')
@@ -37,18 +36,14 @@ describe('Operate.loadTape()', () => {
   })
 
   it('must load and prepare valid tape', async () => {
-    const tape = await Operate.loadTape(
-      '98be5010028302399999bfba0612ee51ea272e7a0eb3b45b4b8bef85f5317633',
-    )
+    const tape = await Operate.loadTape('98be5010028302399999bfba0612ee51ea272e7a0eb3b45b4b8bef85f5317633')
     assert.instanceOf(tape, Tape)
     assert.isTrue(tape.isValid)
     assert.lengthOf(tape.cells, 3)
   })
 
   it('must load and run tape', async () => {
-    const tape = await Operate.loadTape(
-      '98be5010028302399999bfba0612ee51ea272e7a0eb3b45b4b8bef85f5317633',
-    )
+    const tape = await Operate.loadTape('98be5010028302399999bfba0612ee51ea272e7a0eb3b45b4b8bef85f5317633')
     const result = await Operate.runTape(tape)
     assert.equal(result.get('app'), 'twetch')
     assert.include([...result.keys()], '_MAP')
