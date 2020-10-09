@@ -4,6 +4,7 @@ const nock = require('nock')
 const Operate = require(resolve('lib/index'))
 const Agent = require(resolve('lib/operate/agent'))
 const Tape = require(resolve('lib/operate/tape'))
+const Cell = require(resolve('lib/operate/cell'))
 const Bob = require(resolve('lib/operate/adapter/bob'))
 const util = require(resolve('lib/operate/util'))
 
